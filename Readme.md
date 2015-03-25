@@ -1,46 +1,43 @@
-# Choam
-Investigation into creating a node app from scratch for UI developers or fast prototyping
+# CHOAM
+Controlling economical affairs across the cosmos... also a lesser known small **node/express** app for no fuss UI developers and fast prototyping.
 
+- Node.js with Express.js
+- Gulp
+  - stylus using nib,
+  - js that concatenates and minifies
+- Livereload
+- Handlebars and partials
 
+## Steps to create
 
-## Tasks to complete
-
-- [x] 1. Node, Express
-- [x] 2. Task runner to compile, concatenate and watch
-- [x] 3. Livereload
-- [x] 4. Deploy to Heroku
-- [ ] 5. Handlebars and partials
-
-
-### 1. Express
+### Express
 
     $ npm install express --save
     $ express --hbs
-    $ npm install
     $ DEBUG=myapp ./bin/www
 
-### 2. Setup gulp, stylus, watchers etc
+### Setup gulp, stylus, watchers etc
 
     $ npm init
-    $ npm install --save-dev gulp
-    $ npm install gulp-jshint gulp-stylus gulp-concat gulp-uglify gulp-rename --save-dev
-    $ npm install nib --save-dev
+    $ npm install gulp gulp-jshint gulp-stylus nib gulp-concat gulp-uglify gulp-rename gulp-express --save-dev
     $ touch gulpfile.js
-    $ npm i gulp-express --save-dev
 
-### 3. Livereload
+See gulpfile.js
 
-    $ npm i gulp-livereload --save-dev
-    $ npm i connect-livereload --save
-    $ npm i gulp-util // Needed?
+### Livereload
 
-Had to change the port in node_modules for some reason.
+    $ npm install gulp-livereload connect-livereload --save-dev
 
-#### 4. Heroku
+See gulpfile.js for 'server' task addition. Had to change the port in node_modules for some reason.
+
+#### Heroku
 
 Simply add to git repository and deploy via Github on heroku.com
 
-#### 5. Handlebars/partials
+#### Handlebars/partials
+
+Use [this code](https://gist.github.com/benw/3824204) to utilise the hbs that express installed already with the --hbs flag
+
 
 ## Resources
 
@@ -52,4 +49,4 @@ Helpful resources:
 * http://rhumaric.com/2014/01/livereload-magic-gulp-style/
 * http://www.smashingmagazine.com/2014/06/11/building-with-gulp/
 * https://github.com/Dibbin/Express-Handlebars-Less-Jasmine-NodeUnit_Project-Template
-* https://gist.github.com/benw/3824204 Adds partials to express' existing hbs wrapper
+* https://gist.github.com/benw/3824204

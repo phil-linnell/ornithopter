@@ -229,10 +229,6 @@ thead,
 tbody {
   display: block;
 }
-body {
-  font-family: sans-serif;
-  background: #ccc;
-}
 html {
   height: 100%;
 }
