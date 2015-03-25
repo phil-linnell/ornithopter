@@ -1,7 +1,5 @@
 # Choam
 
-## Steps to create:
-
 ### Express
 
     $ npm install express --save
