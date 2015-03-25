@@ -14,6 +14,26 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
+// Helps with this problem:
+// http://stackoverflow.com/questions/8059914/express-js-hbs-module-register-partials-from-hbs-file
+
+var hbs = require('hbs');
+var fs = require('fs');
+
+var partialsDir = __dirname + '/views/partials';
+
+var filenames = fs.readdirSync(partialsDir);
+
+filenames.forEach(function (filename) {
+  var matches = /^([^.]+).hbs$/.exec(filename);
+  if (!matches) {
+    return;
+  }
+  var name = matches[1];
+  var template = fs.readFileSync(partialsDir + '/' + filename, 'utf8');
+  hbs.registerPartial(name, template);
+});
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
