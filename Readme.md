@@ -21,6 +21,12 @@
 
 Add Server task in gulpfile.
 
+### Livereload
+
+    $ npm i gulp-livereload --save-dev
+    $ npm i connect-livereload --save
+    $ npm i gulp-util // Needed?
+
 ### Handlebars/partials
 
 ### Heroku
