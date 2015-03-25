@@ -1,0 +1,29 @@
+body {
+  font-family: sans-serif;
+  background: #ccc;
+}
+html {
+  height: 100%;
+}
+body {
+  font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
+  background: #21182d;
+  color: #fff;
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 6px;
+  min-height: 100%;
+}
+input {
+  border: 1px solid #ccc;
+}
+h1 {
+  text-transform: uppercase;
+  font-size: 12px;
+}
+.container {
+  height: 100vh;
+}
+.hidden {
+  opacity: 0 !important;
+}

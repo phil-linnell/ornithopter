@@ -11,9 +11,6 @@ var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var livereload = require('gulp-livereload');
 
-
-
-
 // Lint Task
 gulp.task('lint', function() {
     return gulp.src('src/js/*.js')
@@ -23,7 +20,7 @@ gulp.task('lint', function() {
 
 // Compile Our Stylus
 gulp.task('css', function() {
-    return gulp.src('src/stylesheets/*.styl')
+    return gulp.src('src/stylesheets/style.styl')
         .pipe(stylus({ use: nib() }))
         .pipe(gulp.dest('public/stylesheets'));
 });
@@ -32,10 +29,10 @@ gulp.task('css', function() {
 gulp.task('scripts', function() {
     return gulp.src('src/js/*.js')
         .pipe(concat('all.js'))
-        .pipe(gulp.dest('dist'))
+        .pipe(gulp.dest('public/js'))
         .pipe(rename('all.min.js'))
         .pipe(uglify())
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest('public/js'));
 });
 
 // Start the server
