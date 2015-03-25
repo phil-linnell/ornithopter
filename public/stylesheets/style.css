@@ -753,11 +753,13 @@ h1 {
   transform: translate3d(11px, 22px, 0);
 }
 .starting-colour button {
-  background: rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.1);
   color: #fff;
-  padding: 0 20px;
-  height: 30px;
-  line-height: 30px;
+  padding: 0 25px;
+  height: 44px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  line-height: 44px;
   margin-top: 50px;
   letter-spacing: 2px;
   color: rgba(255,255,255,0.6);
@@ -770,7 +772,7 @@ h1 {
   z-index: 10;
 }
 .starting-colour button:active {
-  background: rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.25);
 }
 @-moz-keyframes spin {
   100% {

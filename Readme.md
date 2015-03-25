@@ -39,6 +39,12 @@ Simply add to git repository and deploy via Github on heroku.com
 Use [this code](https://gist.github.com/benw/3824204) to utilise the hbs that express installed already with the --hbs flag
 
 
+## TODO:
+
+-[ ] fix watcher for subfolders (stylesheets/components, views/partials)
+-[ ] appropriate place for vendors
+-[ ] move /views into /src ?
+
 ## Resources
 
 Helpful resources:
