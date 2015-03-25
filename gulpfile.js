@@ -2,12 +2,19 @@
 var gulp = require('gulp');
 
 // Include Our Plugins
+var server = require('gulp-express');
 var jshint = require('gulp-jshint');
 var stylus = require('gulp-stylus');
 var nib    = require('nib');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
+
+// Start the server
+gulp.task('server', function() {
+  server.run(['./bin/www'], []);
+});
+
 
 // Lint Task
 gulp.task('lint', function() {
@@ -20,7 +27,7 @@ gulp.task('lint', function() {
 gulp.task('css', function() {
     return gulp.src('src/stylesheets/*.styl')
         .pipe(stylus({ use: nib() }))
-        .pipe(gulp.dest('build/css'));
+        .pipe(gulp.dest('public/stylesheets'));
 });
 
 // Concatenate & Minify JS
@@ -40,4 +47,4 @@ gulp.task('watch', function() {
 });
 
 // Default Task
-gulp.task('default', ['lint', 'css', 'scripts', 'watch']);
+gulp.task('default', ['server', 'lint', 'css', 'scripts', 'watch']);

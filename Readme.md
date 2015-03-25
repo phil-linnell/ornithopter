@@ -2,7 +2,12 @@
 
 ## Steps to create:
 
-Helpful resource: [travismaynard.com/writing/getting-started-with-gulp](http://travismaynard.com/writing/getting-started-with-gulp)
+### Express
+
+    $ npm install express --save
+    $ express --hbs
+    $ npm install
+    $ DEBUG=myapp ./bin/www
 
 ### Setup gulp, stylus, watchers etc
 
@@ -12,12 +17,18 @@ Helpful resource: [travismaynard.com/writing/getting-started-with-gulp](http://t
     $ npm install nib --save-dev
     $ touch gulpfile.js
 
-### Add to this git repository
+### Start server in gulp
 
-    $ git init
-    $ git add -A
-    $ git commt -m "Initial commit"
-    $ git remote add origin git@github.com:pips-io/choam.git
-    $ git push -u origin master
+    $ npm i gulp-express --save-dev
 
-### Add views
+Add Server task in gulpfile.
+
+### Handlebars/partials
+
+### Heroku
+
+## Resources
+
+Helpful resources:
+* http://anotheruiguy.gitbooks.io/nodeexpreslibsass_from-scratch/content/index.html
+* [travismaynard.com/writing/getting-started-with-gulp](http://travismaynard.com/writing/getting-started-with-gulp)
