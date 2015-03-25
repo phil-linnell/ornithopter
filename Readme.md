@@ -1,27 +1,34 @@
 # Choam
+Investigation into creating a node app from scratch for UI developers or fast prototyping
 
-### Express
+
+
+## Tasks to complete
+
+- [x] 1. Node, Express
+- [x] 2. Task runner to compile, concatenate and watch
+- [x] 3. Livereload
+- [x] 4. Deploy to Heroku
+- [ ] 5. Handlebars and partials
+
+
+### 1. Express
 
     $ npm install express --save
     $ express --hbs
     $ npm install
     $ DEBUG=myapp ./bin/www
 
-### Setup gulp, stylus, watchers etc
+### 2. Setup gulp, stylus, watchers etc
 
     $ npm init
     $ npm install --save-dev gulp
     $ npm install gulp-jshint gulp-stylus gulp-concat gulp-uglify gulp-rename --save-dev
     $ npm install nib --save-dev
     $ touch gulpfile.js
-
-### Start server in gulp
-
     $ npm i gulp-express --save-dev
 
-Add Server task in gulpfile.
-
-### Livereload
+### 3. Livereload
 
     $ npm i gulp-livereload --save-dev
     $ npm i connect-livereload --save
@@ -29,9 +36,11 @@ Add Server task in gulpfile.
 
 Had to change the port in node_modules for some reason.
 
-### Heroku
+#### 4. Heroku
 
-### Handlebars/partials
+Simply add to git repository and deploy via Github on heroku.com
+
+#### 5. Handlebars/partials
 
 ## Resources
 
