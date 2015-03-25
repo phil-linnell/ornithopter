@@ -29,9 +29,9 @@ Add Server task in gulpfile.
 
 Had to change the port in node_modules for some reason.
 
-### Handlebars/partials
-
 ### Heroku
+
+### Handlebars/partials
 
 ## Resources
 
