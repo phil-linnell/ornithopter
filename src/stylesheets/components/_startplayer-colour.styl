@@ -171,7 +171,7 @@ margin-size = 10px;
       }
 
 
-      input {
+      div {
         display: block;
         width: button-size;
         height: button-size;
@@ -194,13 +194,13 @@ margin-size = 10px;
 
 
 
-      &.active input {
+      &.active div {
         animation: select .1s linear 1;
         animation-fill-mode: forwards;
 
       }
       &.active.animate {
-        input {
+        div {
           animation: none;
           opacity: 1;
           border-radius: button-size;
@@ -212,7 +212,7 @@ margin-size = 10px;
       &.active.animate.winner {
         transform: translate3d(0,0,0);
         transition: none;
-        input {
+        div {
           animation: result .3s ease-in-out forwards;
         }
       }
@@ -223,7 +223,7 @@ margin-size = 10px;
 
       &.animation-stopping {
         li {
-          input {
+          div {
             transform: scale(0);
           }
         }
@@ -231,7 +231,7 @@ margin-size = 10px;
       &.animation-stopped {
         animation: none;
         li {
-          input {
+          div {
             transform: scale(0);
           }
         }

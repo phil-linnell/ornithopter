@@ -376,7 +376,7 @@ h1 {
   -ms-transform: translate3d(80px, 80px, 0);
   transform: translate3d(80px, 80px, 0);
 }
-.starting-colour .players li input {
+.starting-colour .players li div {
   display: block;
   width: 70px;
   height: 70px;
@@ -406,34 +406,34 @@ h1 {
   border: none;
   cursor: pointer;
 }
-.starting-colour .players li input.yellow {
+.starting-colour .players li div.yellow {
   background-color: #e7e00f;
 }
-.starting-colour .players li input.red {
+.starting-colour .players li div.red {
   background-color: #e71f0f;
 }
-.starting-colour .players li input.white {
+.starting-colour .players li div.white {
   background-color: #fff;
 }
-.starting-colour .players li input.blue {
+.starting-colour .players li div.blue {
   background-color: #1128d4;
 }
-.starting-colour .players li input.green {
+.starting-colour .players li div.green {
   background-color: #268b13;
 }
-.starting-colour .players li input.black {
+.starting-colour .players li div.black {
   background-color: #000;
 }
-.starting-colour .players li input.pink {
+.starting-colour .players li div.pink {
   background-color: #de77cc;
 }
-.starting-colour .players li input.orange {
+.starting-colour .players li div.orange {
   background-color: #e9980c;
 }
-.starting-colour .players li input.purple {
+.starting-colour .players li div.purple {
   background-color: #890ce9;
 }
-.starting-colour .players li.active input {
+.starting-colour .players li.active div {
   -webkit-animation: select 0.1s linear 1;
   -moz-animation: select 0.1s linear 1;
   -o-animation: select 0.1s linear 1;
@@ -452,7 +452,7 @@ h1 {
   -ms-transition: -ms-transform 0.5s ease-in-out;
   transition: transform 0.5s ease-in-out;
 }
-.starting-colour .players li.active.animate input {
+.starting-colour .players li.active.animate div {
   -webkit-animation: none;
   -moz-animation: none;
   -o-animation: none;
@@ -486,7 +486,7 @@ h1 {
   -ms-transition: none;
   transition: none;
 }
-.starting-colour .players li.active.animate.winner input {
+.starting-colour .players li.active.animate.winner div {
   -webkit-animation: result 0.3s ease-in-out forwards;
   -moz-animation: result 0.3s ease-in-out forwards;
   -o-animation: result 0.3s ease-in-out forwards;
@@ -500,7 +500,7 @@ h1 {
   -ms-animation: spin 0.4s linear infinite 0.1s;
   animation: spin 0.4s linear infinite 0.1s;
 }
-.starting-colour .players[class*="amount-"].animation-stopping li input {
+.starting-colour .players[class*="amount-"].animation-stopping li div {
   -webkit-transform: scale(0);
   -moz-transform: scale(0);
   -o-transform: scale(0);
@@ -514,7 +514,7 @@ h1 {
   -ms-animation: none;
   animation: none;
 }
-.starting-colour .players[class*="amount-"].animation-stopped li input {
+.starting-colour .players[class*="amount-"].animation-stopped li div {
   -webkit-transform: scale(0);
   -moz-transform: scale(0);
   -o-transform: scale(0);

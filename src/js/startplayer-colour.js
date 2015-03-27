@@ -4,8 +4,9 @@ $(document).ready(function() {
   var selected = [];
 
   // Starting Colour - choose colours playing
-  $('.starting-colour .players input').on('click', function() {
+  $('.starting-colour .players div').on('click', function() {
 
+    $(this).parent().toggleClass('checked');
     $(this).parent().toggleClass('active');
 
   });
@@ -17,7 +18,7 @@ $(document).ready(function() {
     var player = '.starting-colour .players li';
 
     // Create the pool to which we will find the starting player
-    var selected = $('.starting-colour .players input:checked').map(function(i,el){return el.name;}).get();
+    var selected = $('.starting-colour .checked div').map(function(i,el){return el.className;}).get();
     // Randomise the result
     var result = selected[Math.floor(Math.random()*selected.length)];
 
@@ -47,8 +48,8 @@ $(document).ready(function() {
     setTimeout(function() {
       $('.starting-colour .players').removeClass('animation-stopping');
       $('.starting-colour .players').addClass('animation-stopped');
-      if ( $('.starting-colour .players li input').hasClass(result) ) {
-        $('.starting-colour .players li input.' + result).parent().addClass('winner');
+      if ( $('.starting-colour .players li div').hasClass(result) ) {
+        $('.starting-colour .players li .' + result).parent().addClass('winner');
       }
     }, 3500);
 
