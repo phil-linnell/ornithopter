@@ -6,9 +6,7 @@
     "start": "gulp build && node app.js"
   },
   "dependencies": {
-    "express": "^4.12.3"
-  },
-  "devDependencies": {
+    "express": "^4.12.3",
     "browser-sync": "^2.4.0",
     "gulp": "^3.8.11",
     "gulp-compile-handlebars": "^0.4.4",
