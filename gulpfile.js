@@ -14,12 +14,20 @@ var reload      = browserSync.reload;
 
 
 
+gulp.task('serveprod', function() {
+  connect.server({
+    root: "./build",
+    port: process.env.PORT || 5000, // localhost:5000
+    livereload: false
+  });
+});
+
 gulp.task('browser-sync', function() {
   browserSync.init( {
 		server: {
 			baseDir: "./build"
 		},
-    port: "10191", // Hey that's the year Dune is set!
+    port: "5000", // Hey that's the year Dune is set!
     open: false
   });
 });
@@ -83,4 +91,4 @@ gulp.task('watch', function() {
 });
 
 
-gulp.task('default', ['build', 'browser-sync', 'watch']);
+gulp.task('default', ['serveprod', 'build', 'browser-sync', 'watch']);
