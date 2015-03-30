@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "gulp",
-    "postinstall": "gulp run"
+    "start": "node app.js"
   },
-  "dependencies": {
+  "devDependencies": {
     "browser-sync": "^2.4.0",
+    "express": "^4.12.3",
     "gulp": "^3.8.11",
     "gulp-compile-handlebars": "^0.4.4",
     "gulp-concat": "^2.5.2",

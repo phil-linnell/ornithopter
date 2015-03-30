@@ -12,18 +12,6 @@ var handlebars 	= require('gulp-compile-handlebars');
 var browserSync = require('browser-sync');
 var reload      = browserSync.reload;
 
-var webserver   = require('gulp-webserver');
-
-
-gulp.task('webserver', function() {
-  gulp.src('build')
-    .pipe(webserver({
-      livereload: false,
-      directoryListing: true,
-      open: true
-    }));
-});
-
 
 gulp.task('browser-sync', function() {
   browserSync.init( {
@@ -95,5 +83,3 @@ gulp.task('watch', function() {
 
 
 gulp.task('default', ['build', 'browser-sync', 'watch']);
-
-gulp.task('run', ['webserver']);
