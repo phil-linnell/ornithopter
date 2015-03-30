@@ -5,7 +5,7 @@
   "scripts": {
     "start": "gulp"
   },
-  "devDependencies": {
+  "dependencies": {
     "browser-sync": "^2.4.0",
     "gulp": "^3.8.11",
     "gulp-compile-handlebars": "^0.4.4",
