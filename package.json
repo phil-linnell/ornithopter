@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "gulp production",
-    "postinstall": "gulp production"
+    "start": "gulp build",
+    "postinstall": "gulp build"
   },
   "dependencies": {
     "browser-sync": "^2.4.0",
