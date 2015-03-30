@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "gulp",
-    "postinstall": "gulp"
+    "postinstall": "gulp production"
   },
   "dependencies": {
     "browser-sync": "^2.4.0",

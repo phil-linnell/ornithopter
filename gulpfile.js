@@ -84,3 +84,5 @@ gulp.task('watch', function() {
 
 
 gulp.task('default', ['build', 'browser-sync', 'watch']);
+
+gulp.task('production', ['build']);
