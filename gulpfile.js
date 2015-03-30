@@ -12,13 +12,16 @@ var handlebars 	= require('gulp-compile-handlebars');
 var browserSync = require('browser-sync');
 var reload      = browserSync.reload;
 
+var webserver   = require('gulp-webserver');
 
-gulp.task('serveprod', function() {
-  connect.server({
-    root: "./build",
-    port: process.env.PORT || 5000, // localhost:5000
-    livereload: false
-  });
+
+gulp.task('webserver', function() {
+  gulp.src('build')
+    .pipe(webserver({
+      livereload: false,
+      directoryListing: true,
+      open: true
+    }));
 });
 
 
@@ -93,4 +96,4 @@ gulp.task('watch', function() {
 
 gulp.task('default', ['build', 'browser-sync', 'watch']);
 
-gulp.task('production', ['build', 'serveprod']);
+gulp.task('production', ['build', 'webserver']);
