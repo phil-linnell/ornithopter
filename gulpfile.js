@@ -13,6 +13,14 @@ var browserSync = require('browser-sync');
 var reload      = browserSync.reload;
 
 
+gulp.task('serveprod', function() {
+  connect.server({
+    root: "./build",
+    port: process.env.PORT || 5000, // localhost:5000
+    livereload: false
+  });
+});
+
 
 gulp.task('browser-sync', function() {
   browserSync.init( {
@@ -85,4 +93,4 @@ gulp.task('watch', function() {
 
 gulp.task('default', ['build', 'browser-sync', 'watch']);
 
-gulp.task('production', ['build']);
+gulp.task('production', ['build', 'serveprod']);
