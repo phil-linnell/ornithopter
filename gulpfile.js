@@ -81,5 +81,5 @@ gulp.task('watch', function() {
   gulp.watch('src/views/**/*.html', ['templates']);
 });
 
-
+// Development
 gulp.task('default', ['build', 'browser-sync', 'watch']);
