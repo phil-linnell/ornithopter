@@ -72,8 +72,6 @@ $(document).ready(function() {
   d3.selectAll("circle").on("click", function () {
     var activeClass = "active";
     var alreadyIsActive = d3.select(this).classed(activeClass);
-    // svg.selectAll(".reports-chart__bar")
-    //   .classed(activeClass, false);
     d3.select(this).classed(activeClass, !alreadyIsActive);
   });
 
@@ -97,8 +95,14 @@ $(document).ready(function() {
     var result = selected[Math.floor(Math.random() * selected.length)];
     console.log(result);
 
+    var duration = 1000;
+
     var canvas = (amount * 10) + 30;
-    d3.select("#players").transition().attr("width", canvas).attr("height", canvas);
+    d3.select("#players")
+        .transition()
+        .duration(duration)
+        .attr("width", canvas)
+        .attr("height", canvas);
 
     var newPositions = [];
     var cDiam = canvas - size;
@@ -114,6 +118,7 @@ $(document).ready(function() {
 
     svg.selectAll('circle').data(newPositions)
         .transition()
+        .duration(duration)
         .attr("cx", function(d) {
           return d.xCoor;
         })
