@@ -14,6 +14,15 @@ button-size = 70px;
 margin-size = 10px;
 
 
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+
 #starting-colour {
   width: 320px;
   height: 100%;
@@ -29,10 +38,25 @@ margin-size = 10px;
     margin-bottom: 50px;
   }
 
+  .wrapper {
+    width: 220px;
+    height: 220px;
+    display flex;
+    align-items: center;
+    justify-content: center;
+
+    &.animate {
+      animation: spin 0.4s linear infinite .15s;
+    }
+
+  }
+
   #players {
     position: relative;
     font-size: 0;
-    background: rgba(#000, .2)
+    overflow: visible;
+    // background: rgba(#000, .2)
+
 
 
     offset = (button-size + margin-size);
