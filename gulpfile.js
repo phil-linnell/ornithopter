@@ -71,7 +71,7 @@ gulp.task('templates', function() {
 
 
 
-// Initial build
+// Initial/production build
 gulp.task('build', ['css', 'scripts', 'vendor', 'templates']);
 
 // Watch

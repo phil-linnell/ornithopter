@@ -1,0 +1,177 @@
+playerColour = {
+  yellow: #e7e00f,
+  red: #e71f0f,
+  white: white,
+  blue: #1128d4,
+  green: #268b13,
+  black: black,
+  pink: #de77cc,
+  orange: #e9980c,
+  purple: #890ce9,
+  brown: brown
+}
+
+// Choose initial layout. Temp?
+layout = grid;
+
+amount = 9;
+rows = 3;
+cols = 3;
+
+
+// Width of the main area
+canvas = 210px;
+
+// Starting size of player colour
+player = 40px;
+
+// Size of container to which 'player' resides
+item = canvas / rows;
+
+// If using 'circle' layout and cDiam = canvas then this
+// is the left offset needed to centre everything
+offset = item;
+
+
+// Core
+
+.startplayer {
+
+  &, ul {
+    width: canvas;
+    height: canvas;
+  }
+
+  ul {
+    position: relative;
+    transition: transform .32s ease-in-out;
+
+    if layout == circle {
+      transform: rotate(-180deg);
+    }
+  }
+
+  li {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: item;
+    height: @width;
+    transition: all .32s ease-in-out;
+
+
+    // Default positions
+
+    if layout == grid {
+      for row in 1..rows {
+        for col in 1..cols {
+          index = ((col - 1) * 3) + row;
+          &:nth-child({index}) {
+            left: row * item - offset;
+            top: col * item - offset;
+          }
+        }
+      }
+    }
+
+    if layout == circle {
+      cDiam = canvas; // change this?
+      cRad  = cDiam * 0.5;
+      offset = (canvas - cDiam) / 2;
+      cAngle = 360deg / amount;
+      for i in 1..amount {
+        &:nth-child({i}) {
+          left: cRad + cRad * cos(cAngle * i) - (item * 0.5);
+          top: cRad + cRad * sin(cAngle * i) - (item * 0.5);
+        }
+      }
+    }
+
+  }
+
+
+
+
+  // States and colours
+
+  @keyframes pop {
+    80% {
+      transform: scale(1.6);
+    }
+    100% {
+      transform: scale(1.4);
+    }
+  }
+
+  li {
+
+    for colour, value in playerColour {
+      &.{colour} div {
+        background-color: value;
+      }
+    }
+
+    &[aria-selected="true"] {
+      animation: pop .1s linear 1;
+      animation-fill-mode: forwards;
+    }
+
+    div {
+      width: player;
+      height: @width;
+      border-radius: player * .5;
+    }
+  }
+}
+
+
+/**
+ * NOTES
+ *
+ * 1) Able to achieve complex positions the same as d3/js
+ * 2) However, slight bad feeling that the html class names need to align with the css variables of colours
+ * 3) How to control amount? HTML, JS or CSS?
+ *
+ *
+ *
+ *
+ */
+
+
+
+ // Layout
+
+ .startplayer {
+   width: 320px;
+   height: 100%;
+   margin: 0 auto;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+
+   h1 {
+     position: relative;
+     z-index: 10;
+     margin-bottom: 50px;
+   }
+   button {
+     background: rgba(255,255,255,0.1);
+     color: white;
+     padding: 0 25px;
+     height: 44px;
+     border-radius: 3px;
+     line-height: @height;
+     margin-top: 50px;
+     letter-spacing: 2px;
+     color: rgba(white, 0.6);
+     transition: opacity .2s ease-in-out;
+     position: relative;
+     z-index: 10;
+
+     &:active {
+       background: rgba(255,255,255,0.25);
+     }
+   }
+ }
