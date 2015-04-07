@@ -5,12 +5,14 @@ $(document).ready(function() {
 
   // Create players
 
-  $.getJSON( "../config/palette.json", function(data) {
-    $.each(data.playerColour, function(key, val) {
-      $('.players ul').append('<li class="' + key + '" aria-selected="false"><div></div></li>');
+  function createPlayers() {
+    $.getJSON( "../config/palette.json", function(data) {
+      $.each(data.playerColour, function(key, val) {
+        $('.players ul').append('<li class="' + key + '" aria-selected="false"><div></div></li>');
+      });
     });
-  });
-
+  };
+  createPlayers();
 
 
   // Toggle selected items
@@ -29,7 +31,9 @@ $(document).ready(function() {
 
   var selected = [];
 
-  $('.startplayer .submit').on("click", function() {
+  $('.submit').on("click", function() {
+
+    $('.submit').addClass('hidden');
 
     // Create pool of selected players
     var selected = $('.players li[aria-selected="true"]').map(function(i,el){
@@ -41,7 +45,6 @@ $(document).ready(function() {
     if ( $('.players li').hasClass(result) ) {
       $('.players li.' + result).addClass('winner');
     }
-    console.log(result);
 
     // Hide unselected players
     $('.players li[aria-selected="false"]').detach(); // Don't like removing from DOM
@@ -50,11 +53,29 @@ $(document).ready(function() {
     $('.players').addClass('animate-' + selected.length + '');
 
     // Wait for animation to end and apply stopped class and show the winner
-    $('body').on('animationend webkitAnimationEnd oAnimationEnd', '.players ul', function () {
+    $('body').on('animationend webkitAnimationEnd oAnimationEnd', '.players[class*="animate-"] ul', function () {
+
       $('.players').addClass('stopped');
       $('.winner').addClass('show');
+
+      $('.reset').removeClass('hidden');
+
     });
 
   });
+
+  $('.reset').on('click', function() {
+    $('.players li').detach();
+    $('.players').removeClass('stopped');
+    $('.players').removeClass (function (index, css) {
+      return (css.match (/(^|\s)animate-\S+/g) || []).join(' ');
+    });
+    createPlayers();
+    $('.reset').addClass('hidden');
+    $('.submit').removeClass('hidden');
+  });
+
+
+
 
 });

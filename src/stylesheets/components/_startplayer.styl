@@ -53,6 +53,7 @@ duration-position-set = .2s
     justify-content: center;
     width: item;
     height: @width;
+    cursor: pointer;
     transition: all duration-position-set ease-in-out;
 
 
@@ -175,9 +176,12 @@ duration-position-set = .2s
 
   @keyframes disappear {
     0% {
-      transform: scale(.8);
+      transform: scale(1);
     }
-    60% {
+    45% {
+      transform: scale(0.5);
+    }
+    90% {
       transform: scale(1);
     }
     100% {
@@ -194,9 +198,8 @@ duration-position-set = .2s
   .players[class*="animate-"] {
     animation: spin .4s linear infinite;
     ul {
-      transform: scale(.8);
-      transition: transform 3s linear;
-      animation: disappear 1s linear 1 2s;
+      transition: transform .5s linear;
+      animation: disappear 3s linear 1;
       li {
         transition: all .32s ease-out;
         animation: disappearPlayer .5s linear 1 2.5s;
@@ -286,14 +289,18 @@ duration-position-set = .2s
      z-index: 10;
      margin-bottom: 50px;
    }
+   .buttons {
+     margin-top: 50px;
+     height: 44px;
+   }
    button {
+     text-transform: uppercase;
      background: rgba(255,255,255,0.1);
      color: white;
      padding: 0 25px;
      height: 44px;
      border-radius: 3px;
      line-height: @height;
-     margin-top: 50px;
      letter-spacing: 2px;
      color: rgba(white, 0.6);
      transition: opacity .2s ease-in-out;
@@ -302,6 +309,9 @@ duration-position-set = .2s
 
      &:active {
        background: rgba(255,255,255,0.25);
+     }
+     &.hidden {
+       display: none;
      }
    }
  }
