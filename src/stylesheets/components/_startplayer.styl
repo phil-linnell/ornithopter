@@ -191,37 +191,56 @@ duration-position-set = .2s
     }
   }
 
-  @keyframes change {
-    0% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(0);
-    }
-    100% {
-      transform: scale(0.7);
-    }
-  }
-
   .players[class*="animate-"] {
     animation: spin .4s linear infinite;
     ul {
       transform: scale(.8);
       transition: transform 3s linear;
-      // animation: change .32s linear 1;
-      animation: disappear .5s linear 1 2s;
-      animation-fill-mode: forwards;
+      animation: disappear 1s linear 1 2s;
       li {
         transition: all .32s ease-out;
-        animation: disappearPlayer .5s linear 1 2s;
-        animation-fill-mode: forwards;
+        animation: disappearPlayer .5s linear 1 2.5s;
+      }
+    }
+
+    &.stopped {
+      animation: none;
+      ul {
+        animation: none;
+        transform: scale(.8) !important;
+      }
+      li:not(.winner) {
+        opacity: 0;
+        transition: none;
+      }
+
+      @keyframes result {
+        0% {
+          transform: scale(0);
+        }
+        70% {
+          transform: scale(6);
+        }
+        100% {
+          transform: scale(5);
+        }
+      }
+
+      .winner {
+        top: 50% !important;
+        left: 50% !important;
+        margin-top: - item * 0.5;
+        margin-left: - item * 0.5;
+        transition: none;
+        transform: scale(5);
+        animation: result .32s 1 linear forwards;
       }
     }
   }
 
   for i in 1..amount {
     .players.animate-{i} {
-      cDiam = canvas - ((amount - i) * 25px);
+      cDiam = canvas - ((amount - i) * 20px);
       cRad  = - cDiam * 0.5; // the negative value here means calculations start top left rather than bottom right
       offset = (canvas - cDiam) / 2;
       cAngle = 360deg / i;
@@ -233,6 +252,7 @@ duration-position-set = .2s
       }
     }
   }
+
 
 
 }

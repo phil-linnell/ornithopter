@@ -46,9 +46,12 @@ $(document).ready(function() {
     // Hide unselected players
     $('.players li[aria-selected="false"]').detach(); // Don't like removing from DOM
 
+    // Add class to determine items positions in spinning circle
     $('.players').addClass('animate-' + selected.length + '');
 
+    // Wait for animation to end and apply stopped class and show the winner
     $('body').on('animationend webkitAnimationEnd oAnimationEnd', '.players ul', function () {
+      $('.players').addClass('stopped');
       $('.winner').addClass('show');
     });
 
