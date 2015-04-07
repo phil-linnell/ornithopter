@@ -1,13 +1,12 @@
 {
   "playerColour": {
     "yellow": "#e7e00f",
+    "purple": "#890ce9",
     "red": "#e71f0f",
     "white": "#ffffff",
-    "blue": "#1128d4",
     "green": "#268b13",
     "black": "#000000",
-    "pink": "#de77cc",
-    "orange": "#e9980c",
-    "purple": "#890ce9"
+    "blue": "#1128d4",
+    "pink": "#de77cc"
   }
 }
