@@ -1,57 +1,56 @@
+
+
 $(document).ready(function() {
 
 
+  // Create players
 
-
-  // Toggle selected items
-
-  $(".players li").on('click', function() {
-    $(this).attr('aria-selected', function (i, attr) {
-        return attr == 'true' ? 'false' : 'true';
+  $.getJSON( "../config/palette.json", function(data) {
+    $.each(data.playerColour, function(key, val) {
+      $('.players ul').append('<li class="' + key + '" aria-selected="false"><div></div></li>');
     });
   });
 
 
 
-  //
+  // Toggle selected items
+
+  $('.players').on('click', 'li', function() {
+    $(this).attr('aria-selected', function (i, attr) {
+        return attr == 'true' ? 'false' : 'true';
+    });
+  });
+
+  $(document).on('click', 'h1', function() {
+    $('.players li').attr('aria-selected', 'true');
+  });
+
+
 
   var selected = [];
 
   $('.startplayer .submit').on("click", function() {
 
-    // $('.wrapper').addClass('animate');
-
+    // Create pool of selected players
     var selected = $('.players li[aria-selected="true"]').map(function(i,el){
       return el.className;
     }).get();
 
+    // Generate random winner
     var result = selected[Math.floor(Math.random() * selected.length)];
+    if ( $('.players li').hasClass(result) ) {
+      $('.players li.' + result).addClass('winner');
+    }
     console.log(result);
 
-    $('.players li[aria-selected="false"]').addClass('hidden');
+    // Hide unselected players
+    $('.players li[aria-selected="false"]').detach(); // Don't like removing from DOM
 
+    $('.players').addClass('animate-' + selected.length + '');
 
-    //     setTimeout(function() {
-    //       $('.starting-colour .players li:not(.active)').detach();
-    //     }, 200);
-    //     $('.starting-colour .players li.active').addClass('animate');
-    //
-    //     // Add a class to the container for animation dependant on the amount of players
-    //     var amount = $('.starting-colour .players li.active').length;
-    //     $('.starting-colour .players').addClass('amount-' + amount);
-    //
-    //     //
-    //     setTimeout(function() {
-    //       $('.starting-colour .players').addClass('animation-stopping');
-    //     }, 3000);
-    //
-    //     setTimeout(function() {
-    //       $('.starting-colour .players').removeClass('animation-stopping');
-    //       $('.starting-colour .players').addClass('animation-stopped');
-    //       if ( $('.starting-colour .players li div').hasClass(result) ) {
-    //         $('.starting-colour .players li .' + result).parent().addClass('winner');
-    //       }
-    //     }, 3500);
+    $('body').on('animationend webkitAnimationEnd oAnimationEnd', '.players ul', function () {
+      $('.winner').addClass('show');
+    });
 
   });
 

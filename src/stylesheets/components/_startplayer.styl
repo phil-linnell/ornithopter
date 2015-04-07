@@ -7,12 +7,9 @@ playerColour = {
   black: black,
   pink: #de77cc,
   orange: #e9980c,
-  purple: #890ce9,
-  brown: brown
+  purple: #890ce9
 }
 
-// Choose initial layout. Temp?
-layout = grid;
 
 amount = 9;
 rows = 3;
@@ -33,6 +30,9 @@ item = canvas / rows;
 offset = item;
 
 
+duration-position-set = .2s
+
+
 // Core
 
 .startplayer {
@@ -44,11 +44,6 @@ offset = item;
 
   ul {
     position: relative;
-    transition: transform .32s ease-in-out;
-
-    if layout == circle {
-      transform: rotate(-180deg);
-    }
   }
 
   li {
@@ -58,35 +53,73 @@ offset = item;
     justify-content: center;
     width: item;
     height: @width;
-    transition: all .32s ease-in-out;
+    transition: all duration-position-set ease-in-out;
 
 
     // Default positions
 
-    if layout == grid {
-      for row in 1..rows {
-        for col in 1..cols {
-          index = ((col - 1) * 3) + row;
-          &:nth-child({index}) {
-            left: row * item - offset;
-            top: col * item - offset;
-          }
-        }
-      }
+    // This is the old position order
+    // Arranged by grid:
+    // 1 2 3
+    // 4 5 6
+    // 7 8 9
+
+    // for row in 1..rows {
+    //   for col in 1..cols {
+    //     index = ((col - 1) * 3) + row;
+    //     &:nth-child({i}) {
+    //       left: row * item - offset;
+    //       top: col * item - offset;
+    //     }
+    //   }
+    // }
+
+    // Order or player items positions to emulate a
+    // circular pattern so items are close to their
+    // positions when in the circle mode. nth-child
+    // order is:
+    // 1 2 3
+    // 8 9 4
+    // 7 6 5
+    // Refactor into a loop??
+
+    &:nth-child(1) {
+      left: 1* item - offset;
+      top: 1 * item - offset;
+    }
+    &:nth-child(2) {
+      left: 2 * item - offset;
+      top: 1 * item - offset;
+    }
+    &:nth-child(3) {
+      left: 3 * item - offset;
+      top: 1 * item - offset;
+    }
+    &:nth-child(8) {
+      left: 1 * item - offset;
+      top: 2 * item - offset;
+    }
+    &:nth-child(9) {
+      left: 2 * item - offset;
+      top: 2 * item - offset;
+    }
+    &:nth-child(4) {
+      left: 3 * item - offset;
+      top: 2 * item - offset;
+    }
+    &:nth-child(7) {
+      left: 1 * item - offset;
+      top: 3 * item - offset;
+    }
+    &:nth-child(6) {
+      left: 2 * item - offset;
+      top: 3 * item - offset;
+    }
+    &:nth-child(5) {
+      left: 3 * item - offset;
+      top: 3 * item - offset;
     }
 
-    if layout == circle {
-      cDiam = canvas; // change this?
-      cRad  = cDiam * 0.5;
-      offset = (canvas - cDiam) / 2;
-      cAngle = 360deg / amount;
-      for i in 1..amount {
-        &:nth-child({i}) {
-          left: cRad + cRad * cos(cAngle * i) - (item * 0.5);
-          top: cRad + cRad * sin(cAngle * i) - (item * 0.5);
-        }
-      }
-    }
 
   }
 
@@ -105,6 +138,7 @@ offset = item;
   }
 
   li {
+    opacity: .3;
 
     for colour, value in playerColour {
       &.{colour} div {
@@ -113,6 +147,8 @@ offset = item;
     }
 
     &[aria-selected="true"] {
+      opacity: 1;
+      transition: opacity .2s ease-in-out;
       animation: pop .1s linear 1;
       animation-fill-mode: forwards;
     }
@@ -123,15 +159,89 @@ offset = item;
       border-radius: player * .5;
     }
   }
+
+
+
+
+
+
+  // Animate
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes disappear {
+    0% {
+      transform: scale(.8);
+    }
+    60% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(0);
+    }
+  }
+
+  @keyframes disappearPlayer {
+    100% {
+      transform: scale(0);
+    }
+  }
+
+  @keyframes change {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(0.7);
+    }
+  }
+
+  .players[class*="animate-"] {
+    animation: spin .4s linear infinite;
+    ul {
+      transform: scale(.8);
+      transition: transform 3s linear;
+      // animation: change .32s linear 1;
+      animation: disappear .5s linear 1 2s;
+      animation-fill-mode: forwards;
+      li {
+        transition: all .32s ease-out;
+        animation: disappearPlayer .5s linear 1 2s;
+        animation-fill-mode: forwards;
+      }
+    }
+  }
+
+  for i in 1..amount {
+    .players.animate-{i} {
+      cDiam = canvas - ((amount - i) * 25px);
+      cRad  = - cDiam * 0.5; // the negative value here means calculations start top left rather than bottom right
+      offset = (canvas - cDiam) / 2;
+      cAngle = 360deg / i;
+      for i in 1..i {
+        li[aria-selected="true"]:nth-child({i}) {
+          left: offset + cRad * cos(cAngle * i) - (item * 0.5) - cRad;
+          top: offset + cRad * sin(cAngle * i) - (item * 0.5) - cRad;
+        }
+      }
+    }
+  }
+
+
 }
 
 
 /**
  * NOTES
  *
- * 1) Able to achieve complex positions the same as d3/js
- * 2) However, slight bad feeling that the html class names need to align with the css variables of colours
- * 3) How to control amount? HTML, JS or CSS?
+ *
  *
  *
  *
