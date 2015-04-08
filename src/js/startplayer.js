@@ -7,7 +7,7 @@ $(document).ready(function() {
 
   function createPlayers() {
     $.getJSON( "../config/palette.json", function(data) {
-      $.each(data.playerColour, function(key, val) {
+      $.each(data.colour, function(key, val) {
         $('.players ul').append('<li class="' + key + '" aria-selected="false"><div></div></li>');
       });
     });

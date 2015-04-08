@@ -1,3 +1,4 @@
+// TODO: Move this to JSON
 playerColour = {
   yellow: #e7e00f,
   red: #e71f0f,
@@ -44,6 +45,7 @@ duration-position-set = .2s
 
   ul {
     position: relative;
+    // color: palette(colour, yellow);
   }
 
   li {
@@ -82,7 +84,7 @@ duration-position-set = .2s
     // 1 2 3
     // 8 9 4
     // 7 6 5
-    // Refactor into a loop??
+    // Refactor into a loop somehow???
 
     &:nth-child(1) {
       left: 1* item - offset;
@@ -241,6 +243,7 @@ duration-position-set = .2s
     }
   }
 
+  // Position in a circle path
   for i in 1..amount {
     .players.animate-{i} {
       cDiam = canvas - ((amount - i) * 24px);
