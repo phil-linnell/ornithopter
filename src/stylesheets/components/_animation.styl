@@ -1,67 +1,123 @@
 /**
  * CSS Animation function
  *
- * Duration valus in seconds (s)
+ * Duration values in seconds(s)
  *
  *
  *
 */
+//
+//
+// cubicbezier(s, p1x, p1y, p2x, p2y) {
+//   for i in (s)..1 {
+//     t = i * (1 / (s + 1));
+//     d = 1
+//
+//     b0 = t * t * t
+//     b1 = 3 * t * t * (1 - t)
+//     b2 = 3 * t * (1 - t) * (1 - t)
+//     b3 = (1 - t) * (1 - t) * (1 - t)
+//
+//     p0 = {
+//       x: 0,
+//       y: 0
+//     }
+//     p1 = {
+//       x: p1x,
+//       y: p1y
+//     }
+//     p2 = {
+//       x: p2x,
+//       y: p2y
+//     }
+//     p3 = {
+//       x: 1,
+//       y: 1
+//     }
+//
+//     x = p0.x * (b0 * d) + p1.x * (b1 * d) + p2.x * (b2 * d) + p3.x * (b3 * d);
+//     y = p0.y * (b0 * d) + p1.y * (b1 * d) + p2.y * (b2 * d) + p3.y * (b3 * d);
+//
+//     x: x;
+//     y: y;
+//
+//   }
+// }
+//
+// cubicbezier(4,0,0.5,0.5,1);
 
-
-
-for i in 1..4 {
-
-  // Return 4 sets of coordinates between 0 and 1
-  // so, 20%, 40%, 60% and 80%
-  t = i * 0.2;
-  d = 1
-
-  B1 = t * t * t
-  B2 = 3 * t * t * (1 - t)
-  B3 = 3 * t * (1 - t) * (1 - t)
-  B4 = (1 - t) * (1 - t) * (1 - t)
-
-  C1 = {x: 0,   y: 0}
-  C2 = {x: 0,   y: 0.5}
-  C3 = {x: 0.5, y: 1}
-  C4 = {x: 1,   y: 1}
-
-  x = C1.x * (B1 * d) + C2.x * (B2 * d) + C3.x * (B3 * d) + C4.x * (B4 * d);
-  y = C1.y * (B1 * d) + C2.y * (B2 * d) + C3.y * (B3 * d) + C4.y * (B4 * d);
-
-  div {
-    x: x;
-    y: y;
-  }
-}
-
-animate-me(core, actions) {
+animate(core, animations) {
 
   @keyframes {core.name} {
 
-     for type, i in actions {
+     for type, i in animations {
 
-      $p = actions[type].property;
-      $duration = actions[type].duration;
-      $delay = actions[type].delay;
+      $p = animations[type].property;
+      $duration = animations[type].duration;
+      $delay = animations[type].delay;
+      $accuracy = animations[type].accuracy;
 
-      if (actions[type].delay > 0) {
-        {actions[type].delay / core.total-duration * 100%} {
-          $p: actions[type].from;
+      // Start all animations
+      if (animations[type].delay > 0) {
+        {animations[type].delay / core.total-duration * 100%} {
+          $p: animations[type].from;
         }
       } else {
         0% {
-          $p: actions[type].from;
+          $p: animations[type].from;
         }
       }
 
-      {actions[type].total / core.total-duration * 100%} {
-        $p: actions[type].to;
+      // Animations' keyframes
+      if (animations[type].curves) {
+        for i in (4)..1 {
+          // Return 4 sets of coordinates between 0 and 1
+          // so, 20%, 40%, 60% and 80%
+          t = i * (1 / (4 + 1));
+          d = 1
+
+          b0 = t * t * t
+          b1 = 3 * t * t * (1 - t)
+          b2 = 3 * t * (1 - t) * (1 - t)
+          b3 = (1 - t) * (1 - t) * (1 - t)
+
+          p0 = {
+            x: 0,
+            y: 0
+          }
+          p1 = {
+            x: animations[type].curves.p1x,
+            y: animations[type].curves.p1y
+          }
+          p2 = {
+            x: animations[type].curves.p2x,
+            y: animations[type].curves.p2y
+          }
+          p3 = {
+            x: 1,
+            y: 1
+          }
+
+          x = p0.x * (b0 * d) + p1.x * (b1 * d) + p2.x * (b2 * d) + p3.x * (b3 * d);
+          y = p0.y * (b0 * d) + p1.y * (b1 * d) + p2.y * (b2 * d) + p3.y * (b3 * d);
+
+          {(x * 100%) + animations[type].delay / core.total-duration * 100%} {
+            $p: unquote("translateY(" + y * 100px + ")");
+          }
+
+        }
       }
 
-      if (actions[type].duration < core.total-duration) {
+
+      // End all animations
+      {animations[type].total / core.total-duration * 100%} {
+        $p: animations[type].to;
+      }
+
+      // Preserve end state of any animations to 100%
+      if (animations[type].duration < core.total-duration) {
         100% {
-          $p: actions[type].to;
+          $p: animations[type].to;
         }
       }
 
@@ -91,9 +147,10 @@ $block-core = {
   curves: linear
 }
 
-$block-actions = {
+$block-animations = {
   move: {
     property: transform,
+    attribute: translateY,
     from: translateY(0px),
     to: translateY(100px),
     duration: 1.5,
@@ -104,21 +161,22 @@ $block-actions = {
       p1y: 0,
       p2x: 0,
       p2y: 1
-    }
+    },
+    accuracy: 5
   },
   fade: {
     property: opacity,
     from: 0,
     to: 1,
     duration: 0.5,
-    delat: 0,
+    delay: 0,
     total: 0.5
   }
 }
 
 
 .block {
-  animate-me($block-core, $block-actions);
+  animate($block-core, $block-animations);
   width: 40px;
   height: @width;
   background: #000;
