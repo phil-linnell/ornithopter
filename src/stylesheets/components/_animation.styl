@@ -7,12 +7,43 @@
  *
 */
 
+
+
+for i in 1..4 {
+
+  // Return 4 sets of coordinates between 0 and 1
+  // so, 20%, 40%, 60% and 80%
+  t = i * 0.2;
+  d = 1
+
+  B1 = t * t * t
+  B2 = 3 * t * t * (1 - t)
+  B3 = 3 * t * (1 - t) * (1 - t)
+  B4 = (1 - t) * (1 - t) * (1 - t)
+
+  C1 = {x: 0,   y: 0}
+  C2 = {x: 0,   y: 0.5}
+  C3 = {x: 0.5, y: 1}
+  C4 = {x: 1,   y: 1}
+
+  x = C1.x * (B1 * d) + C2.x * (B2 * d) + C3.x * (B3 * d) + C4.x * (B4 * d);
+  y = C1.y * (B1 * d) + C2.y * (B2 * d) + C3.y * (B3 * d) + C4.y * (B4 * d);
+
+  div {
+    x: x;
+    y: y;
+  }
+}
+
 animate-me(core, actions) {
+
   @keyframes {core.name} {
 
      for type, i in actions {
 
       $p = actions[type].property;
+      $duration = actions[type].duration;
+      $delay = actions[type].delay;
 
       if (actions[type].delay > 0) {
         {actions[type].delay / core.total-duration * 100%} {
@@ -37,7 +68,9 @@ animate-me(core, actions) {
     }
 
   }
+
   animation: unquote(core.name + " " + core.total-duration + "s " + core.iteration + " " + core.curves);
+
 }
 
 
