@@ -1,0 +1,92 @@
+/**
+ * CSS Animation function
+ *
+ * Duration valus in seconds (s)
+ *
+ *
+ *
+*/
+
+animate-me(core, actions) {
+  @keyframes {core.name} {
+
+     for type, i in actions {
+
+      $p = actions[type].property;
+
+      if (actions[type].delay > 0) {
+        {actions[type].delay / core.total-duration * 100%} {
+          $p: actions[type].from;
+        }
+      } else {
+        0% {
+          $p: actions[type].from;
+        }
+      }
+
+      {actions[type].total / core.total-duration * 100%} {
+        $p: actions[type].to;
+      }
+
+      if (actions[type].duration < core.total-duration) {
+        100% {
+          $p: actions[type].to;
+        }
+      }
+
+    }
+
+  }
+  animation: unquote(core.name + " " + core.total-duration + "s " + core.iteration + " " + core.curves);
+}
+
+
+
+
+
+
+
+/** Example
+*/
+
+
+
+$block-core = {
+  name: block-move,
+  total-duration: 2,
+  iteration: infinite,
+  curves: linear
+}
+
+$block-actions = {
+  move: {
+    property: transform,
+    from: translateY(0px),
+    to: translateY(100px),
+    duration: 1.5,
+    delay: 0.5,
+    total: 2, // TODO: remove the need for this
+    curves: {
+      p1x: 0,
+      p1y: 0,
+      p2x: 0,
+      p2y: 1
+    }
+  },
+  fade: {
+    property: opacity,
+    from: 0,
+    to: 1,
+    duration: 0.5,
+    delat: 0,
+    total: 0.5
+  }
+}
+
+
+.block {
+  animate-me($block-core, $block-actions);
+  width: 40px;
+  height: @width;
+  background: #000;
+}
