@@ -183,8 +183,22 @@ $block-animation = {
       property: transform translate Y,
       from: 200px,
       to: 0px,
-      duration: 1.5,
+      duration: 1,
       delay: 0,
+      curves: {
+        p1x: 0,
+        p1y: 0.2,
+        p2x: 0.5,
+        p2y: 1
+      },
+      accuracy: 10
+    },
+    move2: {
+      property: transform translate Y,
+      from: 0,
+      to: 200px,
+      duration: 1,
+      delay: 1,
       curves: {
         p1x: 0.3,
         p1y: 0,
@@ -192,21 +206,22 @@ $block-animation = {
         p2y: 1
       },
       accuracy: 10
-    },
-    fade: {
-      property: opacity,
-      from: 1,
-      to: 0,
-      duration: 0.5,
-      delay: 1.5,
-      curves: {
-        p1x: 0,
-        p1y: 0.5,
-        p2x: 0.5,
-        p2y: 1
-      },
-      accuracy: 3
     }
+    // ,
+    // fade: {
+    //   property: opacity,
+    //   from: 1,
+    //   to: 0,
+    //   duration: 0.5,
+    //   delay: 1.5,
+    //   curves: {
+    //     p1x: 0,
+    //     p1y: 0.5,
+    //     p2x: 0.5,
+    //     p2y: 1
+    //   },
+    //   accuracy: 3
+    // }
   }
 }
 
