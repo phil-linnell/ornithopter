@@ -6,45 +6,44 @@
  *
  *
 */
+
+// cubicbezier(s, p1x, p1y, p2x, p2y) {
+//   for i in (s)..1 {
+//     t = i * (1 / (s + 1));
+//     d = 1
 //
+//     b0 = t * t * t
+//     b1 = 3 * t * t * (1 - t)
+//     b2 = 3 * t * (1 - t) * (1 - t)
+//     b3 = (1 - t) * (1 - t) * (1 - t)
 //
-cubicbezier(s, p1x, p1y, p2x, p2y) {
-  for i in (s)..1 {
-    t = i * (1 / (s + 1));
-    d = 1
-
-    b0 = t * t * t
-    b1 = 3 * t * t * (1 - t)
-    b2 = 3 * t * (1 - t) * (1 - t)
-    b3 = (1 - t) * (1 - t) * (1 - t)
-
-    p0 = {
-      x: 0,
-      y: 0
-    }
-    p1 = {
-      x: p1x,
-      y: p1y
-    }
-    p2 = {
-      x: p2x,
-      y: p2y
-    }
-    p3 = {
-      x: 1,
-      y: 1
-    }
-
-    x = p0.x * (b0 * d) + p1.x * (b1 * d) + p2.x * (b2 * d) + p3.x * (b3 * d);
-    y = p0.y * (b0 * d) + p1.y * (b1 * d) + p2.y * (b2 * d) + p3.y * (b3 * d);
-
-    x: x;
-    y: y;
-
-  }
-}
-
-cubicbezier(4,0.3,0,0,1);
+//     p0 = {
+//       x: 0,
+//       y: 0
+//     }
+//     p1 = {
+//       x: p1x,
+//       y: p1y
+//     }
+//     p2 = {
+//       x: p2x,
+//       y: p2y
+//     }
+//     p3 = {
+//       x: 1,
+//       y: 1
+//     }
+//
+//     x = p0.x * (b0 * d) + p1.x * (b1 * d) + p2.x * (b2 * d) + p3.x * (b3 * d);
+//     y = p0.y * (b0 * d) + p1.y * (b1 * d) + p2.y * (b2 * d) + p3.y * (b3 * d);
+//
+//     x: x;
+//     y: y;
+//
+//   }
+// }
+//
+// cubicbezier(4,0.3,0,0,1);
 
 animate(a) {
 
@@ -52,7 +51,7 @@ animate(a) {
 
      for type, i in a.animations {
 
-      $p = a.animations[type].property[0];
+      $p = a.animations[type].property.prop;
       $duration = a.animations[type].duration;
       $delay = a.animations[type].delay;
       $accuracy = a.animations[type].accuracy;
@@ -64,8 +63,8 @@ animate(a) {
       $per-duration = $duration / a.total-duration * 100%;
 
       if ($p == transform) {
-        $transform-type = a.animations[type].property[1];
-        $transform-type-option = a.animations[type].property[2];
+        $transform-type = a.animations[type].property.type;
+        $transform-type-option = a.animations[type].property.option;
         $from = $transform-type + $transform-type-option + "(" + $from + ")";
         $to = $transform-type + $transform-type-option + "(" + $to + ")";
       }
@@ -73,11 +72,11 @@ animate(a) {
       // Start all animations
       if ($delay > 0) {
         {$per-delay} {
-          $p: $from;
+          {$p}: $from;
         }
       } else {
         0% {
-          $p: $from;
+          {$p}: $from;
         }
       }
 
@@ -114,25 +113,25 @@ animate(a) {
           x = p0.x * (b0 * d) + p1.x * (b1 * d) + p2.x * (b2 * d) + p3.x * (b3 * d);
           y = p0.y * (b0 * d) + p1.y * (b1 * d) + p2.y * (b2 * d) + p3.y * (b3 * d);
 
-          {($per-delay) + (x * $per-duration)} {
+          {round(($per-delay) + (x * $per-duration))} {
 
             if ($p == transform) {
               $to2 = a.animations[type].to; // Need this as $to already overriden in if(transform) above
               $from2 = a.animations[type].from;
-              $new-to = $transform-type + $transform-type-option + "(" + $to2 * y + ")";
-              $new-from = $transform-type + $transform-type-option + "(" + ($from2 - ($from2 * y)) + ")";
+              $new-to = $transform-type + $transform-type-option + "(" + round($to2 * y) + ")";
+              $new-from = $transform-type + $transform-type-option + "(" + round($from2 - ($from2 * y)) + ")";
               if ($to > $from) {
-                $p: $new-to;
+                {$p}: $new-to;
               } else {
-                $p: $new-from;
+                {$p}: $new-from;
               }
             } else {
-              $new-to = $to * y;
-              $new-from = $from * y;
+              $new-to = round($to * y);
+              $new-from = round($from * y);
               if ($to > $from) {
-                $p: $new-to;
+                {$p}: $new-to;
               } else {
-                $p: $from - $new-from;
+                {$p}: $from - $new-from;
               }
             }
 
@@ -144,13 +143,13 @@ animate(a) {
 
       // End all animations
       {$total / a.total-duration * 100%} {
-        $p: $to;
+        {$p}: $to;
       }
 
       // Preserve end state of any animations to 100%
       if ((a.animations[type].duration + $delay) < a.total-duration) {
         100% {
-          $p: $to;
+          {$p}: $to;
         }
       }
 
@@ -180,7 +179,11 @@ $block-animation = {
   curves: linear,
   animations: {
     move: {
-      property: transform translate Y,
+      property: {
+        prop: transform,
+        type: translate,
+        option: Y
+      }
       from: 200px,
       to: 0px,
       duration: 1,
@@ -194,7 +197,11 @@ $block-animation = {
       accuracy: 10
     },
     move2: {
-      property: transform translate Y,
+      property: {
+        prop: transform,
+        type: translate,
+        option: Y
+      }
       from: 0,
       to: 200px,
       duration: 1,
