@@ -8,72 +8,85 @@
 */
 //
 //
-// cubicbezier(s, p1x, p1y, p2x, p2y) {
-//   for i in (s)..1 {
-//     t = i * (1 / (s + 1));
-//     d = 1
-//
-//     b0 = t * t * t
-//     b1 = 3 * t * t * (1 - t)
-//     b2 = 3 * t * (1 - t) * (1 - t)
-//     b3 = (1 - t) * (1 - t) * (1 - t)
-//
-//     p0 = {
-//       x: 0,
-//       y: 0
-//     }
-//     p1 = {
-//       x: p1x,
-//       y: p1y
-//     }
-//     p2 = {
-//       x: p2x,
-//       y: p2y
-//     }
-//     p3 = {
-//       x: 1,
-//       y: 1
-//     }
-//
-//     x = p0.x * (b0 * d) + p1.x * (b1 * d) + p2.x * (b2 * d) + p3.x * (b3 * d);
-//     y = p0.y * (b0 * d) + p1.y * (b1 * d) + p2.y * (b2 * d) + p3.y * (b3 * d);
-//
-//     x: x;
-//     y: y;
-//
-//   }
-// }
-//
-// cubicbezier(4,0,0.5,0.5,1);
+cubicbezier(s, p1x, p1y, p2x, p2y) {
+  for i in (s)..1 {
+    t = i * (1 / (s + 1));
+    d = 1
 
-animate(core, animations) {
+    b0 = t * t * t
+    b1 = 3 * t * t * (1 - t)
+    b2 = 3 * t * (1 - t) * (1 - t)
+    b3 = (1 - t) * (1 - t) * (1 - t)
 
-  @keyframes {core.name} {
+    p0 = {
+      x: 0,
+      y: 0
+    }
+    p1 = {
+      x: p1x,
+      y: p1y
+    }
+    p2 = {
+      x: p2x,
+      y: p2y
+    }
+    p3 = {
+      x: 1,
+      y: 1
+    }
 
-     for type, i in animations {
+    x = p0.x * (b0 * d) + p1.x * (b1 * d) + p2.x * (b2 * d) + p3.x * (b3 * d);
+    y = p0.y * (b0 * d) + p1.y * (b1 * d) + p2.y * (b2 * d) + p3.y * (b3 * d);
 
-      $p = animations[type].property;
-      $duration = animations[type].duration;
-      $delay = animations[type].delay;
-      $accuracy = animations[type].accuracy;
+    x: x;
+    y: y;
+
+  }
+}
+
+cubicbezier(4,0.3,0,0,1);
+
+animate(a) {
+
+  @keyframes {a.name} {
+
+     for type, i in a.animations {
+
+      $p = a.animations[type].property[0];
+      $duration = a.animations[type].duration;
+      $delay = a.animations[type].delay;
+      $accuracy = a.animations[type].accuracy;
+      $from = a.animations[type].from;
+      $to = a.animations[type].to;
+      $total = $duration + $delay;
+
+      $per-delay = $delay / a.total-duration * 100%;
+      $per-duration = $duration / a.total-duration * 100%;
+
+      if ($p == transform) {
+        $transform-type = a.animations[type].property[1];
+        $transform-type-option = a.animations[type].property[2];
+        $from = $transform-type + $transform-type-option + "(" + $from + ")";
+        $to = $transform-type + $transform-type-option + "(" + $to + ")";
+      }
 
       // Start all animations
-      if (animations[type].delay > 0) {
-        {animations[type].delay / core.total-duration * 100%} {
-          $p: animations[type].from;
+      if ($delay > 0) {
+        {$per-delay} {
+          $p: $from;
         }
       } else {
         0% {
-          $p: animations[type].from;
+          $p: $from;
         }
       }
 
       // Animations' keyframes
-      if (animations[type].curves) {
-        for i in (4)..1 {
+      if (a.animations[type].curves) {
+        for i in ($accuracy)..1 {
           // Return 4 sets of coordinates between 0 and 1
           // so, 20%, 40%, 60% and 80%
-          t = i * (1 / (4 + 1));
+          t = i * (1 / ($accuracy + 1));
           d = 1
 
           b0 = t * t * t
@@ -86,12 +99,12 @@ animate(core, animations) {
             y: 0
           }
           p1 = {
-            x: animations[type].curves.p1x,
-            y: animations[type].curves.p1y
+            x: a.animations[type].curves.p1x,
+            y: a.animations[type].curves.p1y
           }
           p2 = {
-            x: animations[type].curves.p2x,
-            y: animations[type].curves.p2y
+            x: a.animations[type].curves.p2x,
+            y: a.animations[type].curves.p2y
           }
           p3 = {
             x: 1,
@@ -101,8 +114,20 @@ animate(core, animations) {
           x = p0.x * (b0 * d) + p1.x * (b1 * d) + p2.x * (b2 * d) + p3.x * (b3 * d);
           y = p0.y * (b0 * d) + p1.y * (b1 * d) + p2.y * (b2 * d) + p3.y * (b3 * d);
 
-          {(x * 100%) + animations[type].delay / core.total-duration * 100%} {
-            $p: unquote("translateY(" + y * 100px + ")");
+          {($per-delay) + (x * $per-duration)} {
+
+            if ($p == transform) {
+
+              $to2 = a.animations[type].to;
+              $y = y;
+              $new-pos = $to2 * $y;
+              $to = $transform-type + $transform-type-option + "(" + $new-pos + ")";
+
+              $p: $to;
+            } else {
+              $p: y * $to;
+            }
+
           }
 
         }
@@ -110,14 +135,14 @@ animate(core, animations) {
 
 
       // End all animations
-      {animations[type].total / core.total-duration * 100%} {
-        $p: animations[type].to;
+      {$total / a.total-duration * 100%} {
+        $p: $to;
       }
 
       // Preserve end state of any animations to 100%
-      if (animations[type].duration < core.total-duration) {
+      if ((a.animations[type].duration + $delay) < a.total-duration) {
         100% {
-          $p: animations[type].to;
+          $p: $to;
         }
       }
 
@@ -125,7 +150,7 @@ animate(core, animations) {
 
   }
 
-  animation: unquote(core.name + " " + core.total-duration + "s " + core.iteration + " " + core.curves);
+  animation: unquote(a.name + " " + a.total-duration + "s " + a.iteration + " " + a.curves);
 
 }
 
@@ -140,43 +165,46 @@ animate(core, animations) {
 
 
 
-$block-core = {
+$block-animation = {
   name: block-move,
   total-duration: 2,
   iteration: infinite,
-  curves: linear
-}
-
-$block-animations = {
-  move: {
-    property: transform,
-    attribute: translateY,
-    from: translateY(0px),
-    to: translateY(100px),
-    duration: 1.5,
-    delay: 0.5,
-    total: 2, // TODO: remove the need for this
-    curves: {
-      p1x: 0,
-      p1y: 0,
-      p2x: 0,
-      p2y: 1
+  curves: linear,
+  animations: {
+    move: {
+      property: transform translate Y,
+      from: 0px,
+      to: 200px,
+      duration: 1.5,
+      delay: 0,
+      curves: {
+        p1x: 0.3,
+        p1y: 0,
+        p2x: 0,
+        p2y: 1
+      },
+      accuracy: 10
     },
-    accuracy: 5
-  },
-  fade: {
-    property: opacity,
-    from: 0,
-    to: 1,
-    duration: 0.5,
-    delay: 0,
-    total: 0.5
+    fade: {
+      property: opacity,
+      from: 1,
+      to: 0,
+      duration: 0.5,
+      delay: 1.5,
+      curves: {
+        p1x: 0,
+        p1y: 0.5,
+        p2x: 0.5,
+        p2y: 1
+      },
+      accuracy: 3
+    }
   }
 }
 
 
 .block {
-  animate($block-core, $block-animations);
+  animate($block-animation);
   width: 40px;
   height: @width;
   background: #000;
