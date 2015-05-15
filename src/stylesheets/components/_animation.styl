@@ -117,15 +117,23 @@ animate(a) {
           {($per-delay) + (x * $per-duration)} {
 
             if ($p == transform) {
-
-              $to2 = a.animations[type].to;
-              $y = y;
-              $new-pos = $to2 * $y;
-              $to = $transform-type + $transform-type-option + "(" + $new-pos + ")";
-
-              $p: $to;
+              $to2 = a.animations[type].to; // Need this as $to already overriden in if(transform) above
+              $from2 = a.animations[type].from;
+              $new-to = $transform-type + $transform-type-option + "(" + $to2 * y + ")";
+              $new-from = $transform-type + $transform-type-option + "(" + ($from2 - ($from2 * y)) + ")";
+              if ($to > $from) {
+                $p: $new-to;
+              } else {
+                $p: $new-from;
+              }
             } else {
-              $p: y * $to;
+              $new-to = $to * y;
+              $new-from = $from * y;
+              if ($to > $from) {
+                $p: $new-to;
+              } else {
+                $p: $from - $new-from;
+              }
             }
 
           }
@@ -173,8 +181,8 @@ $block-animation = {
   animations: {
     move: {
       property: transform translate Y,
-      from: 0px,
-      to: 200px,
+      from: 200px,
+      to: 0px,
       duration: 1.5,
       delay: 0,
       curves: {
