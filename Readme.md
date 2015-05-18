@@ -1,13 +1,7 @@
-# CHOAM
-Controlling economical affairs across the cosmos... also a lesser known small website of various little apps and points of interest by Phil Linnell.
-
-http://cho.am
+# ORNITHOPTER
+Create a series of CSS only animations allowing for cubic-bezier motion within in each animation segment, e.g. 10% - 20%.
 
 ```
 $ npm install
 $ gulp
 ```
-
-
-#### Current content:
-- Starting Player - determine starting player of board games by colour
