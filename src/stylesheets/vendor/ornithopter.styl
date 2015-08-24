@@ -1,5 +1,5 @@
 /**
- * CSS Animation function v.0.1
+ * CSS Animation function v.0.1.1
  * by Phil Linnell, phil@ustwo.com
  *
  * A function that compiles a series of animation segments declared in an object
@@ -27,11 +27,8 @@ animate(a) {
 
       if ($prop == transform) {
         $transform-type = a.animations[type].property.type;
-        if (a.animations[type].property.option) {
-          $transform-type-option = a.animations[type].property.option;
-        }
-        $from = $transform-type + $transform-type-option + "(" + $from + ")";
-        $to = $transform-type + $transform-type-option + "(" + $to + ")";
+        $from = $transform-type + "(" + $from + ")";
+        $to = $transform-type + "(" + $to + ")";
       }
 
       // Start all animations
@@ -82,8 +79,8 @@ animate(a) {
             if ($prop == transform) {
               $to2 = a.animations[type].to; // Need this as $to already overriden in if(transform) above
               $from2 = a.animations[type].from;
-              $new-to = $transform-type + $transform-type-option + "(" + round($to2 * y) + ")";
-              $new-from = $transform-type + $transform-type-option + "(" + round($from2 - ($from2 * y)) + ")";
+              $new-to = $transform-type + "(" + round($to2 * y) + ")";
+              $new-from = $transform-type + "(" + round($from2 - ($from2 * y)) + ")";
               if ($to > $from) {
                 {$prop}: $new-to;
               } else {
@@ -154,8 +151,7 @@ $block-animation = {
     move: {
       property: {
         prop: transform,
-        type: translate,
-        option: Y
+        type: translateY
       }
       from: 200px,
       to: 0,
@@ -176,8 +172,7 @@ $block-animation = {
     spin: {
       property: {
         prop: transform,
-        type: rotate,
-        option: Z
+        type: rotateZ
       }
       from: 0,
       to: 360deg,
@@ -198,8 +193,7 @@ $block-animation = {
     move-back: {
       property: {
         prop: transform,
-        type: translate,
-        option: Y
+        type: translateY
       }
       from: 0,
       to: 200px,
