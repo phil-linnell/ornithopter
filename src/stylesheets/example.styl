@@ -1,0 +1,156 @@
+/* Example */
+
+loader-size = 12px;
+loader-jump = loader-size * 2.25;
+loader-bg = #fff;
+
+$jumping-box = {
+  name: jumping,
+  total-duration: 1.7,
+  iteration: infinite,
+  curves: linear,
+  animations: {
+    moveUp: {
+      property: {
+        prop: bottom,
+      }
+      from: 0,
+      to: loader-jump,
+      duration: 0.5,
+      delay: 0.33,
+      curves: {
+        c1: 0 1,
+        c2: 0.86 1
+      }
+      curveAccuracy: 5
+    }
+    moveDown: {
+      property: {
+        prop: bottom,
+      }
+      from: loader-jump,
+      to: 0,
+      duration: 0.33,
+      delay: 0.83,
+      curves: {
+        c1: 0.5 0,
+        c2: 1 0.8
+      }
+      curveAccuracy: 5
+    }
+    squashDown: {
+      property: {
+        prop: transform,
+        type: scale
+      }
+      from: '1, 1',
+      to: '1.25, 0.25',
+      duration: 0.33,
+      delay: 0
+    }
+    squashUp: {
+      property: {
+        prop: transform,
+        type: scale
+      }
+      from: '1.25, 0.25',
+      to: '0.8, 1.13',
+      duration: 0.25,
+      delay: 0.33
+    }
+    squashNormalise: {
+      property: {
+        prop: transform,
+        type: scale
+      }
+      from: '0.8, 1.13',
+      to: '1, 1',
+      duration: 0.33,
+      delay: 0.58
+    }
+    squashTop: {
+      property: {
+        prop: transform,
+        type: scale
+      }
+      from: '1, 1',
+      to: '1, 0.8',
+      duration: 0.25,
+      delay: 0.91
+    }
+    squashFall: {
+      property: {
+        prop: transform,
+        type: scale
+      }
+      from: '1, 0.8',
+      to: '1.5, 0.25',
+      duration: 0.08,
+      delay: 1.16
+    }
+    squashEnd: {
+      property: {
+        prop: transform,
+        type: scale
+      }
+      from: '1.5, 0.25',
+      to: '1, 1',
+      duration: 0.25,
+      delay: 1.24
+    }
+  }
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.loading {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 80px);
+
+  ul {
+    margin-bottom: 70px;
+    font-size: 0;
+
+    li {
+      position: relative;
+      width: loader-size;
+      height: loader-size + loader-jump;
+      display: inline-block;
+      margin-left: loader-size * .75;
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      div {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: loader-size;
+        height: loader-size;
+        background: #FFBF02;
+        animate($jumping-box);
+        transform-origin: 50% bottom;
+      }
+
+      &:nth-child(2) div {
+        animation-delay: 0.08s;
+        background: #96CC29;
+      }
+      &:nth-child(3) div {
+        animation-delay: 0.16s;
+        background: #009CF3;
+      }
+      &:nth-child(4) div {
+        animation-delay: 0.24s;
+        background: #ED0082;
+      }
+    }
+  }
+}

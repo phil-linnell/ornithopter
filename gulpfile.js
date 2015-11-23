@@ -1,13 +1,8 @@
 var gulp = require('gulp');
-
 var stylus      = require('gulp-stylus');
-var nib         = require('nib');
-
 var handlebars 	= require('gulp-compile-handlebars');
-
 var browserSync = require('browser-sync');
 var reload      = browserSync.reload;
-
 
 gulp.task('browser-sync', function() {
   browserSync.init( {
@@ -19,11 +14,10 @@ gulp.task('browser-sync', function() {
   });
 });
 
-
 // CSS
 gulp.task('css', function() {
   return gulp.src('src/stylesheets/style.styl')
-    .pipe(stylus({use: nib()}))
+    .pipe(stylus({}))
     .pipe(gulp.dest('build/stylesheets'))
     .pipe(reload({stream: true}));
 });
@@ -47,7 +41,6 @@ gulp.task('templates', function() {
 		.pipe(gulp.dest('build/'))
 		.pipe(reload({stream:true}));
 });
-
 
 // Initial/production build
 gulp.task('build', ['css', 'templates']);
