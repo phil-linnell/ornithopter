@@ -27,9 +27,9 @@ animate(a) {
       $per-delay = $delay / a.total-duration * 100%;
       $per-duration = $duration / a.total-duration * 100%;
 
-      if (a.animations[type].property == scale) {
+      if (a.animations[type].property[0] == transform) {
         $prop = 'transform';
-        $transform-type = a.animations[type].property;
+        $transform-type = a.animations[type].property[1];
         $from = $transform-type + "(" + $from + ")";
         $to = $transform-type + "(" + $to + ")";
       }

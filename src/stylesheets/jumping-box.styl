@@ -30,47 +30,47 @@ $jumping-box = {
       delay: 0.83,
       curve: {
         c1: 0.5 0,
-        c2: 1 0.8,
+        c2: 1 1,
         accuracy: 5
       }
     }
     squashDown: {
-      property: scale,
+      property: transform scale,
       from: '1, 1',
       to: '1.25, 0.25',
       duration: 0.33,
       delay: 0
     }
     squashUp: {
-      property: scale,
+      property: transform scale,
       from: '1.25, 0.25',
       to: '0.8, 1.13',
       duration: 0.25,
       delay: 0.33
     }
     squashNormalise: {
-      property: scale,
+      property: transform scale,
       from: '0.8, 1.13',
       to: '1, 1',
       duration: 0.33,
       delay: 0.58
     }
-    squashTop: {
-      property: scale,
+    squashFall: {
+      property: transform scale,
       from: '1, 1',
       to: '1, 0.8',
       duration: 0.25,
       delay: 0.91
     }
-    squashFall: {
-      property: scale,
+    squashLand: {
+      property: transform scale,
       from: '1, 0.8',
       to: '1.5, 0.25',
       duration: 0.08,
       delay: 1.16
     }
     squashEnd: {
-      property: scale,
+      property: transform scale,
       from: '1.5, 0.25',
       to: '1, 1',
       duration: 0.25,
