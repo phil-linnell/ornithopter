@@ -101,56 +101,47 @@ $jumping-box = {
   }
 }
 
-* {
-  padding: 0;
-  margin: 0;
-}
-
-.loading {
-  display: flex;
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-  height: calc(100vh - 80px);
+.jumping-boxes {
 
   ul {
-    margin-bottom: 70px;
     font-size: 0;
+  }
 
-    li {
-      position: relative;
+  li {
+    position: relative;
+    display: inline-block;
+    width: loader-size;
+    height: loader-size + loader-jump;
+    margin-left: loader-size * .75;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    div {
+      position: absolute;
+      bottom: 0;
+      left: 0;
       width: loader-size;
-      height: loader-size + loader-jump;
-      display: inline-block;
-      margin-left: loader-size * .75;
+      height: loader-size;
+      background: #FFBF02;
+      transform-origin: 50% bottom;
+      animate($jumping-box);
+    }
 
-      &:first-child {
-        margin-left: 0;
-      }
+    &:nth-child(2) div {
+      animation-delay: 0.08s;
+      background: #96CC29;
+    }
 
-      div {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: loader-size;
-        height: loader-size;
-        background: #FFBF02;
-        animate($jumping-box);
-        transform-origin: 50% bottom;
-      }
+    &:nth-child(3) div {
+      animation-delay: 0.16s;
+      background: #009CF3;
+    }
 
-      &:nth-child(2) div {
-        animation-delay: 0.08s;
-        background: #96CC29;
-      }
-      &:nth-child(3) div {
-        animation-delay: 0.16s;
-        background: #009CF3;
-      }
-      &:nth-child(4) div {
-        animation-delay: 0.24s;
-        background: #ED0082;
-      }
+    &:nth-child(4) div {
+      animation-delay: 0.24s;
+      background: #ED0082;
     }
   }
 }

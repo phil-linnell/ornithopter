@@ -1,5 +1,10 @@
-html {
-  height: 100%;
+* {
+  /* Hard reset */
+  margin: 0;
+  padding: 0;
+  /* End */
+
+  box-sizing: border-box;
 }
 
 body {
@@ -10,15 +15,9 @@ body {
   min-height: 100%;
 }
 
-input {
-  border: 1px solid #ccc;
-}
-
-h1 {
-  text-transform: uppercase;
-  font-size: 12px;
-}
-
 .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 100vh;
 }
