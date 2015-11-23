@@ -8,91 +8,69 @@ $jumping-box = {
   name: jumping,
   total-duration: 1.7,
   iteration: infinite,
-  curves: linear,
+  timingFunction: linear,
   animations: {
     moveUp: {
-      property: {
-        prop: bottom,
-      }
+      property: bottom,
       from: 0,
       to: loader-jump,
       duration: 0.5,
       delay: 0.33,
-      curves: {
+      curve: {
         c1: 0 1,
-        c2: 0.86 1
+        c2: 0.86 1,
+        accuracy: 5
       }
-      curveAccuracy: 5
     }
     moveDown: {
-      property: {
-        prop: bottom,
-      }
+      property: bottom,
       from: loader-jump,
       to: 0,
       duration: 0.33,
       delay: 0.83,
-      curves: {
+      curve: {
         c1: 0.5 0,
-        c2: 1 0.8
+        c2: 1 0.8,
+        accuracy: 5
       }
-      curveAccuracy: 5
     }
     squashDown: {
-      property: {
-        prop: transform,
-        type: scale
-      }
+      property: scale,
       from: '1, 1',
       to: '1.25, 0.25',
       duration: 0.33,
       delay: 0
     }
     squashUp: {
-      property: {
-        prop: transform,
-        type: scale
-      }
+      property: scale,
       from: '1.25, 0.25',
       to: '0.8, 1.13',
       duration: 0.25,
       delay: 0.33
     }
     squashNormalise: {
-      property: {
-        prop: transform,
-        type: scale
-      }
+      property: scale,
       from: '0.8, 1.13',
       to: '1, 1',
       duration: 0.33,
       delay: 0.58
     }
     squashTop: {
-      property: {
-        prop: transform,
-        type: scale
-      }
+      property: scale,
       from: '1, 1',
       to: '1, 0.8',
       duration: 0.25,
       delay: 0.91
     }
     squashFall: {
-      property: {
-        prop: transform,
-        type: scale
-      }
+      property: scale,
       from: '1, 0.8',
       to: '1.5, 0.25',
       duration: 0.08,
       delay: 1.16
     }
     squashEnd: {
-      property: {
-        prop: transform,
-        type: scale
-      }
+      property: scale,
       from: '1.5, 0.25',
       to: '1, 1',
       duration: 0.25,

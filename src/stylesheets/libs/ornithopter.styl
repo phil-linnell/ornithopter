@@ -17,10 +17,9 @@ animate(a) {
 
      for type, i in a.animations {
 
-      $prop = a.animations[type].property.prop;
+      $prop = a.animations[type].property;
       $duration = a.animations[type].duration;
       $delay = a.animations[type].delay;
-      $accuracy = a.animations[type].curveAccuracy;
       $from = a.animations[type].from;
       $to = a.animations[type].to;
       $total = $duration + $delay;
@@ -28,8 +27,9 @@ animate(a) {
       $per-delay = $delay / a.total-duration * 100%;
       $per-duration = $duration / a.total-duration * 100%;
 
-      if ($prop == transform) {
-        $transform-type = a.animations[type].property.type;
+      if (a.animations[type].property == scale) {
+        $prop = 'transform';
+        $transform-type = a.animations[type].property;
         $from = $transform-type + "(" + $from + ")";
         $to = $transform-type + "(" + $to + ")";
       }
@@ -46,7 +46,8 @@ animate(a) {
       }
 
       // Animations' keyframes
-      if (a.animations[type].curves) {
+      if (a.animations[type].curve) {
+        $accuracy = a.animations[type].curve.accuracy;
         for i in ($accuracy)..1 {
           // Return sets of coordinates between 0 and 1 equal to animation's accuracy
           t = i * (1 / ($accuracy + 1));
@@ -58,10 +59,10 @@ animate(a) {
           b3 = (1 - t) * (1 - t) * (1 - t)
 
           p0 = 0 0;
-          p1x = a.animations[type].curves.c1[0];
-          p1y = a.animations[type].curves.c1[1];
-          p2x = a.animations[type].curves.c2[0];
-          p2y = a.animations[type].curves.c2[1];
+          p1x = a.animations[type].curve.c1[0];
+          p1y = a.animations[type].curve.c1[1];
+          p2x = a.animations[type].curve.c2[0];
+          p2y = a.animations[type].curve.c2[1];
           p3 = 1 1;
 
           x = p0[0] * (b0 * d) + p1x * (b1 * d) + p2x * (b2 * d) + p3[0] * (b3 * d);
@@ -99,5 +100,5 @@ animate(a) {
     }
   }
 
-  animation: unquote(a.name + " " + a.total-duration + "s " + a.iteration + " " + a.curves);
+  animation: unquote(a.name + " " + a.total-duration + "s " + a.iteration + " " + a.timingFunction);
 }
