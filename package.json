@@ -1,9 +1,18 @@
 {
-  "name": "choam",
-  "version": "0.3.0",
+  "name": "ornithopter",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "gulp build && node app.js"
+    "start": "gulp build && node app.js",
+    "test": "mocha --compilers js:babel-register $(find tests -name '*_test.js')"
+  },
+  "devDependencies": {
+    "babel": "6.3.13",
+    "babel-cli": "6.3.17",
+    "babel-preset-es2015": "6.3.13",
+    "babel-register": "6.3.13",
+    "chai": "3.4.1",
+    "mocha": "2.3.4"
   },
   "dependencies": {
     "browser-sync": "^2.4.0",
