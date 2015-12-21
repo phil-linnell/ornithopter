@@ -1,0 +1,16 @@
+@keyframes animation-unit {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    color: red;
+  }
+  100% {
+    color: green;
+    transform: translateX(100px);
+  }
+}
+
+div {
+  animation: animation-unit 1s 1s infinite;
+}

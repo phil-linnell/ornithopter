@@ -1,0 +1,12 @@
+@keyframes animation-unit {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100px);
+  }
+}
+
+div {
+  animation: animation-unit 1s infinite 1s;
+}

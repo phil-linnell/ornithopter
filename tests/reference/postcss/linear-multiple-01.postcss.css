@@ -1,0 +1,8 @@
+@ornithopter animation-unit {
+  color: red green;
+  transform: translateX(0, 100px);
+}
+
+div {
+  animation: animation-unit 1s 1s infinite;
+}

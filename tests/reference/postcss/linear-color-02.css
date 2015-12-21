@@ -1,0 +1,12 @@
+@keyframes animation-unit {
+  50% {
+    color: red;
+  }
+  100% {
+    color: green;
+  }
+}
+
+div {
+  animation: animation-unit 1s 1s infinite;
+}
