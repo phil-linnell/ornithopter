@@ -2,7 +2,7 @@ FROM node:5-slim
 MAINTAINER Arnau Siches <asiches@gmail.com>
 
 ENV TERM xterm-256color
-ENV NODE_PATH /home/ornithopter/server
+ENV NODE_PATH /home/ornithopter/lib
 ENV PATH $PATH:/home/ornithopter/node_modules/.bin
 
 WORKDIR /home/ornithopter
@@ -11,5 +11,5 @@ COPY .babelrc /home/ornithopter/.babelrc
 
 RUN npm install
 
-COPY ./src /home/ornithopter/src
+COPY ./lib /home/ornithopter/lib
 COPY ./tests /home/ornithopter/tests

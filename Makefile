@@ -23,6 +23,7 @@ shell:
 
 define job
   $(DOCKER_JOB) --volume $(PWD)/src:/home/ornithopter/src \
+                --volume $(PWD)/lib:/home/ornithopter/lib \
                 --volume $(PWD)/tests:/home/ornithopter/tests \
                 --workdir /home/ornithopter \
                 $(image_name) \
