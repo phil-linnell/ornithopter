@@ -8,16 +8,17 @@ DOCKER_JOB := $(DOCKER) run --rm -it
 default: build
 
 build:
-	$(DOCKER) build -t $(image_name) .
+	@$(DOCKER) build -t $(image_name) .
 .PHONY: build
 
+TEST_FILES ?= $(wildcard tests/*_test.js)
+TEST_CMD ?= mocha --compilers js:babel-register $(TEST_FILES)
 test:
-	$(call job, npm run test)
+	@$(call job, $(TEST_CMD))
 .PHONY: test
 
-
 shell:
-	$(call job, bash)
+	@$(call job, bash)
 .PHONY: shell
 
 
