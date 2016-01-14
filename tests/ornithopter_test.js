@@ -1,5 +1,5 @@
 import {expect} from "chai";
-import {processColor, tokeniser, getKeyframes} from "ornithopter";
+import {processColor, tokeniser, steps, keyframe} from "ornithopter";
 
 describe("ornithopter", () => {
   describe(".processColor()", () => {
@@ -50,21 +50,54 @@ describe("ornithopter", () => {
     });
   });
 
-  describe(".getKeyframes()", () => {
+  describe(".steps()", () => {
     it("should return an array of 2", () => {
-      expect(getKeyframes(2)).to.deep.equal([0,100]);
+      var actual = steps(['yellow', 'blue']);
+      var expected = [{step: 0, properties: [{name: 'color', value: 'yellow'}]},
+                      {step: 100, properties: [{name: 'color', value: 'blue'}]}];
+      expect(actual).to.deep.equal(expected);
     });
     it("should return an array of 3", () => {
-      expect(getKeyframes(3)).to.deep.equal([0,50,100]);
+      var actual = steps(['red', 'green', 'yellow']);
+      var expected = [{step: 0, properties: [{name: 'color', value: 'red'}]},
+                      {step: 50, properties: [{name: 'color', value: 'green'}]},
+                      {step: 100, properties: [{name: 'color', value: 'yellow'}]}];
+      expect(actual).to.deep.equal(expected);
     });
     it("should return an array of 4", () => {
-      expect(getKeyframes(4)).to.deep.equal([0,33.33,66.67,100]);
+      var actual = steps(['red', 'green', 'yellow', 'blue']);
+      var expected = [{step: 0, properties: [{name: 'color', value: 'red'}]},
+                      {step: 33.33, properties: [{name: 'color', value: 'green'}]},
+                      {step: 66.67, properties: [{name: 'color', value: 'yellow'}]},
+                      {step: 100, properties: [{name: 'color', value: 'blue'}]}];
+      expect(actual).to.deep.equal(expected);
     });
     it("should return an array of 6", () => {
-      expect(getKeyframes(6)).to.deep.equal([0,20,40,60,80,100]);
+      var actual = steps(['red', 'green', 'yellow', 'blue', 'pink', 'orange']);
+      var expected = [{step: 0, properties: [{name: 'color', value: 'red'}]},
+                      {step: 20, properties: [{name: 'color', value: 'green'}]},
+                      {step: 40, properties: [{name: 'color', value: 'yellow'}]},
+                      {step: 60, properties: [{name: 'color', value: 'blue'}]},
+                      {step: 80, properties: [{name: 'color', value: 'pink'}]},
+                      {step: 100, properties: [{name: 'color', value: 'orange'}]}];
+      expect(actual).to.deep.equal(expected);
     });
     it("should return an array of 7", () => {
-      expect(getKeyframes(7)).to.deep.equal([0,16.67,33.33,50,66.67,83.33,100]);
+      var actual = steps(['red', 'green', 'yellow', 'blue', 'pink', 'purple', 'orange']);
+      var expected = [{step: 0, properties: [{name: 'color', value: 'red'}]},
+                      {step: 16.67, properties: [{name: 'color', value: 'green'}]},
+                      {step: 33.33, properties: [{name: 'color', value: 'yellow'}]},
+                      {step: 50, properties: [{name: 'color', value: 'blue'}]},
+                      {step: 66.67, properties: [{name: 'color', value: 'pink'}]},
+                      {step: 83.33, properties: [{name: 'color', value: 'purple'}]},
+                      {step: 100, properties: [{name: 'color', value: 'orange'}]}];
+      expect(actual).to.deep.equal(expected);
+    });
+  });
+
+  describe(".keyframe()", () => {
+    it("should return a keyframe", () => {
+      expect(keyframe(0, 'red')).to.deep.equal({step: 0, properties: [{name: 'color', value: 'red'}]});
     });
   });
 });
