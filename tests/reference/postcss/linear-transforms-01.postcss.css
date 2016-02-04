@@ -1,0 +1,9 @@
+@ornithopter animation-unit {
+  transform: translateX(100px, 200px);
+  transform: rotate(0deg, 360deg);
+  transofmr: translate(100px, 200px, 0px, 50px); // 100 to 200 on X, 0 to 50 on Y
+}
+
+div {
+  animation: animation-unit 1s 1s infinite;
+}
