@@ -1,0 +1,12 @@
+@keyframes ornithopter {
+  0% {
+    transform: translateX(100px);
+  }
+  100% {
+    transform: translateX(200px);
+  }
+}
+
+div {
+  animation: animation-unit 1s 1s infinite;
+}

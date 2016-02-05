@@ -1,0 +1,12 @@
+@keyframes ornithopter {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+div {
+  animation: animation-unit 1s 1s infinite;
+}
