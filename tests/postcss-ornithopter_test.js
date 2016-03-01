@@ -3,7 +3,7 @@ import postcss from "postcss";
 import chai, {expect} from "chai";
 import chaiAsPromised from "chai-as-promised";
 
-import ornithopter from "postcss-ornithopter";
+import ornithopter, {createComposedProperty} from "postcss-ornithopter";
 
 chai.use(chaiAsPromised);
 
@@ -15,9 +15,9 @@ describe("postcss-ornithopter", function () {
   // })
 
   describe("scratchpad", function () {
-    it("should foo", function (done) {
-      const from = "tests/reference/postcss/linear-color-02.postcss.css";
-      const to = "tests/reference/postcss/linear-color-02.css";
+    it("should transpile linear color 02", function (done) {
+      const from = "tests/reference/postcss/linear-color.postcss.css";
+      const to = "tests/reference/postcss/linear-color.css";
 
       const input = fs.readFileSync(from, "utf-8");
       const output = fs.readFileSync(to, "utf-8");
@@ -28,4 +28,10 @@ describe("postcss-ornithopter", function () {
                                                   .notify(done);
     });
   });
+
+  it("should create the composed property data structure", function () {
+    expect(createComposedProperty('color', 'red green'))
+      .to.deep.equal(['color', ['red', 'green']]);
+  });
+
 });
