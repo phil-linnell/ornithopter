@@ -10,28 +10,27 @@ chai.use(chaiAsPromised);
 const processor = postcss([ornithopter]);
 
 describe("postcss-ornithopter", function () {
-  // beforeEach(function () {
-  //   const processor = postcss([ornithopter]);
-  // })
-
   describe("scratchpad", function () {
-    it("should transpile linear color 02", function (done) {
-      const from = "tests/reference/postcss/linear-color.postcss.css";
-      const to = "tests/reference/postcss/linear-color.css";
+    ["linear-color"].forEach(refname => {
+      it(`should transpile ${refname}`, function (done) {
+        const from = `tests/reference/postcss/${refname}.postcss.css`;
+        const to = `tests/reference/postcss/${refname}.css`;
 
-      const input = fs.readFileSync(from, "utf-8");
-      const output = fs.readFileSync(to, "utf-8");
+        const input = fs.readFileSync(from, "utf-8");
+        const output = fs.readFileSync(to, "utf-8");
 
-      expect(processor.process(input, {from, to})
-                      .then(result => result.css)).to.eventually
-                                                  .eq(output)
-                                                  .notify(done);
+        expect(processor.process(input, {from, to})
+                        .then(result => result.css)).to.eventually
+                                                    .eq(output)
+                                                    .notify(done);
+      });
     });
   });
 
   it("should create the composed property data structure", function () {
-    expect(createComposedProperty({prop: 'color', value: 'red green'}))
-      .to.deep.equal(['color', ['red', 'green']]);
+    expect(createComposedProperty({prop: 'color',
+                                   value: 'red green'})).to.deep
+                                                        .equal(['color',
+                                                                ['red', 'green']]);
   });
-
 });
