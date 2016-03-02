@@ -30,7 +30,7 @@ describe("postcss-ornithopter", function () {
   });
 
   it("should create the composed property data structure", function () {
-    expect(createComposedProperty('color', 'red green'))
+    expect(createComposedProperty({prop: 'color', value: 'red green'}))
       .to.deep.equal(['color', ['red', 'green']]);
   });
 
