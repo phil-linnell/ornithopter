@@ -3,7 +3,7 @@ import postcss from "postcss";
 import chai, {expect} from "chai";
 import chaiAsPromised from "chai-as-promised";
 
-import ornithopter, {createComposedProperty} from "postcss-ornithopter";
+import ornithopter, {toComposedProperty} from "postcss-ornithopter";
 
 chai.use(chaiAsPromised);
 
@@ -28,9 +28,9 @@ describe("postcss-ornithopter", function () {
   });
 
   it("should create the composed property data structure", function () {
-    expect(createComposedProperty({prop: 'color',
-                                   value: 'red green'})).to.deep
-                                                        .equal(['color',
-                                                                ['red', 'green']]);
+    expect(toComposedProperty({prop: 'color',
+                               value: 'red green'})).to.deep
+                                                    .equal(['color',
+                                                            ['red', 'green']]);
   });
 });
