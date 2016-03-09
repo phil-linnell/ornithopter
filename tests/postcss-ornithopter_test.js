@@ -55,7 +55,7 @@ describe("postcss-ornithopter", function () {
         const to = `tests/reference/postcss/linear-transforms-02.css`;
 
         const input = fs.readFileSync(from, "utf-8");
-        const output = "@keyframes ornithopter {0% {transform: rotate(0deg)\n}100% {transform: rotate(360deg)\n}\n}\n\ndiv {\nanimation: animation-unit 1s 1s infinite;\n}\n";
+        const output = "@keyframes animation-unit {0% {transform: rotate(0deg)\n}100% {transform: rotate(360deg)\n}\n}\n\ndiv {\n  animation: animation-unit 1s 1s infinite;\n}\n";
 
         expect(processor.process(input, {from, to})
                         .then(result => result.css)).to.eventually
