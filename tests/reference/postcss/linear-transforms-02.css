@@ -1,5 +1,5 @@
-@keyframes ornithopter {
-  0% {
+@keyframes animation-unit {
+  50% {
     transform: rotate(0deg);
   }
   100% {
