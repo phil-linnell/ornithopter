@@ -1,7 +1,11 @@
-# ORNITHOPTER
-A function that compiles a series of animation segments declared in an object (durations in seconds) to a set of keyframes which allows for cubic-bezier motion within each animation segment, e.g. cubic-bezier(.6, .1, .2, .8) from 20% to 50%.
+# Ornithopter
 
-```
-$ npm install
-$ gulp
-```
+Written by Phil Linnell (@phil-linnell) and Arnau Siches (@arnau).
+
+Ornithopter is a [PostCSS](https://github.com/postcss/postcss) plugin that
+allows you to describe and reason about animations in an expressive way.
+
+
+## License
+
+Ornithopter is licensed under MIT. Check the [full license](./LICENSE)
