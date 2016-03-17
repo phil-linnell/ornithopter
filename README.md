@@ -24,7 +24,7 @@ This syntax follows [MDN Value definition syntax](https://developer.mozilla.org/
 where
 <identifier>        = IDENT
 <animation-unit>    = <property> : <composed-value> ;
-<composed-value>    = [<value>+ || <composed-function>] <timing>
+<composed-value>    = [<value>+ || <composed-function>] <timing>?
 <timing>            = [<duration> <delay>?] | <timing-function>
 <composed-function> = [translate || translateX || translateY || scale ||
                       scaleX || scaleY || rotate || skew || skewX || skewY ||
@@ -33,6 +33,17 @@ where
                       perspective] ( <functon-value> [, <function-value>]+ )
 ```
 
+So all the following are valid `<timing>` expressions:
+
+```
+1s                // 1s of duration
+1s 0.5s           // 1s of duration, 0.5s of delay
+ease-out          // ease-out timing function
+1s ease-out       // 1s of duration, ease-out timing function
+ease-out 1s       // ease-out timing function, 1s of duration
+1s 0.5s ease-out  // 1s of duration, 0.5s of delay, ease-out timing function
+ease-out 1s 0.5s  // ease-out timing function, 1s of duration, 0.5s of delay
+```
 
 
 ## Roadmap
