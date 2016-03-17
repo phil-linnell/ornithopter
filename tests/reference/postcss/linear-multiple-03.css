@@ -1,4 +1,4 @@
-@keyframes animation-unit {
+@keyframes animation-set {
   0% {
     color: red;
   }
@@ -11,5 +11,5 @@
 }
 
 div {
-  animation: animation-unit 1s 1s infinite;
+  animation: animation-set 1s 1s infinite;
 }

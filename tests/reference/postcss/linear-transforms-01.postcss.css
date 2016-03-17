@@ -1,7 +1,7 @@
-@ornithopter animation-unit {
+@ornithopter animation-set {
   transform: translateX(100px, 200px);
 }
 
 div {
-  animation: animation-unit 1s 1s infinite;
+  animation: animation-set 1s 1s infinite;
 }

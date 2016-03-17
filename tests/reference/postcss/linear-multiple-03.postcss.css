@@ -1,8 +1,8 @@
-@ornithopter animation-unit {
+@ornithopter animation-set {
   color: red green 0.5s;
   color: green yellow 0.5s 0.5s;
 }
 
 div {
-  animation: animation-unit 1s 1s infinite;
+  animation: animation-set 1s 1s infinite;
 }

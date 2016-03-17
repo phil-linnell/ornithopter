@@ -1,4 +1,4 @@
-@keyframes animation-unit {
+@keyframes animation-set {
   0% {
     transform: translateX(0);
   }
@@ -8,5 +8,5 @@
 }
 
 div {
-  animation: animation-unit 1s infinite 1s;
+  animation: animation-set 1s infinite 1s;
 }

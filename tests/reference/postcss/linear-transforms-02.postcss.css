@@ -1,7 +1,8 @@
-@ornithopter animation-unit {
+@ornithopter animation-set {
   transform: rotate(0deg, 360deg) .5s .5s;
+
 }
 
 div {
-  animation: animation-unit 1s 1s infinite;
+  animation: animation-set 1s 1s infinite;
 }
