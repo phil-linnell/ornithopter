@@ -2,6 +2,7 @@ import chai, {expect} from "chai";
 import chaiAsPromised from "chai-as-promised";
 
 import {parseTransformValue} from "utils/value";
+import {isTime} from "utils/time";
 
 chai.use(chaiAsPromised);
 
@@ -21,5 +22,17 @@ describe("utils", function () {
         expect(parseTransformValue("rotateX(1deg,2deg)")).to.deep.equal(["rotateX","1deg","2deg"]);
       });
 
+  });
+
+  describe("isTime", function () {
+    it("should be true for the given value", function () {
+      expect(isTime("1s")).to.be.true;
+      expect(isTime("1ms")).to.be.true;
+      expect(isTime("0.5s")).to.be.true;
+      expect(isTime(".5s")).to.be.true;
+      expect(isTime("0")).to.be.true;
+      expect(isTime("0s")).to.be.true;
+      expect(isTime("25.5s")).to.be.true;
+    })
   });
 });

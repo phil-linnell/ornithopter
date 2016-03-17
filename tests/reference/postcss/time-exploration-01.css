@@ -1,0 +1,12 @@
+@keyframes animation-set {
+  0% {
+    color: red;
+  }
+  100% {
+    color: green;
+  }
+}
+
+div {
+  animation: animation-set;
+}
