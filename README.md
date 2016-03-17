@@ -6,6 +6,16 @@ Ornithopter is a [PostCSS](https://github.com/postcss/postcss) plugin that
 allows you to describe and reason about animations in an expressive way.
 
 
+## How are we doing it
+
+Instead of having to define every single keyframe via `@keyframes`, Ornithopter
+allows you to define an **animation set** via an `@ornithopter` at-rule.
+
+Each declaration inside is an animation unit able to define a property with
+a set of values it needs to have and a timing function to apply to these
+values.
+
+
 ## Syntax
 
 This syntax follows [MDN Value definition syntax](https://developer.mozilla.org/en-US/docs/Web/CSS/Value_definition_syntax).
@@ -56,4 +66,4 @@ ease-out 1s 0.5s  // ease-out timing function, 1s of duration, 0.5s of delay
 
 ## License
 
-Ornithopter is licensed under MIT. Check the [full license](./LICENSE)
+Ornithopter is licensed under MIT. Check the [full license](./LICENSE).
