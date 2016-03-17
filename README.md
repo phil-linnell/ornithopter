@@ -11,7 +11,7 @@ allows you to describe and reason about animations in an expressive way.
 This syntax follows [MDN Value definition syntax](https://developer.mozilla.org/en-US/docs/Web/CSS/Value_definition_syntax).
 
 * `<identifier>`: A name identifying the animation set.  Follows the same rules expected by a `@keyframes` identifier.
-* `<property>`: Any valid CSS property.
+* `<property>`: Any valid CSS property able to receive a transition effect.
 * `<value>`: A valid CSS value for the given property. If the value is a function (e.g. `transform` functions,) use a `<composed-function>`.
 * `<transform-function>`: Restricted set from [transform function](https://developer.mozilla.org/en-US/docs/Web/CSS/transform#Syntax).
 * `<function-value>` : A valid value for the given function.
@@ -24,7 +24,8 @@ This syntax follows [MDN Value definition syntax](https://developer.mozilla.org/
 where
 <identifier>        = IDENT
 <animation-unit>    = <property> : <composed-value> ;
-<composed-value>    = [<value>+ || <composed-function>] <duration>? <delay>? <timing-function>?
+<composed-value>    = [<value>+ || <composed-function>] <timing>
+<timing>            = [<duration> <delay>?] | <timing-function>
 <composed-function> = [translate || translateX || translateY || scale ||
                       scaleX || scaleY || rotate || skew || skewX || skewY ||
                       translate3d || translateZ || scale3d || scaleZ ||
