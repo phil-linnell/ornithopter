@@ -13,7 +13,8 @@ describe("postcss-ornithopter", function () {
   describe("scratchpad", function () {
      ["linear-color-01",
       "linear-multiple-01",
-      "linear-transforms-01"].forEach(refname => {
+      "linear-transforms-01",
+      "time-exploration-01"].forEach(refname => {
        it(`should transpile ${refname}`, function (done) {
          const from = `tests/reference/postcss/${refname}.postcss.css`;
          const to = `tests/reference/postcss/${refname}.css`;
