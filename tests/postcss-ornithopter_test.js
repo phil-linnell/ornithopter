@@ -33,7 +33,7 @@ describe("postcss-ornithopter", function () {
   it("should create the composed property data structure", function () {
     expect(toComposedProperty({prop: 'color',
                                value: 'red green'})).to.deep
-                                                    .equal(['color',
-                                                            ['red', 'green']]);
+                                                    .equal({property: 'color',
+                                                            value: ['red', 'green']});
   });
 });
