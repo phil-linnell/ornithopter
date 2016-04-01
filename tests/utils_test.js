@@ -2,7 +2,7 @@ import chai, {expect} from "chai";
 import chaiAsPromised from "chai-as-promised";
 
 import {parseTransformValue} from "utils/value";
-import {isTime, isTimingFunction, splitByTime, convertToMilliseconds} from "utils/time";
+import {isTime, isTimingFunction, splitByTime, toMilliseconds} from "utils/time";
 
 chai.use(chaiAsPromised);
 
@@ -62,12 +62,12 @@ describe("utils", function () {
     });
   });
 
-  describe("convertToMilliseconds", function () {
+  describe("toMilliseconds", function () {
     it("should convert duration in seconds to duration in milliseconds", function () {
-      expect(convertToMilliseconds("1s")).to.deep.equal("1000ms");
+      expect(toMilliseconds("1s")).to.deep.equal("1000ms");
     });
     it("should return duration as it is already in milliseconds", function () {
-      expect(convertToMilliseconds("1000ms")).to.deep.equal("1000ms");
+      expect(toMilliseconds("1000ms")).to.deep.equal("1000ms");
     });
   });
 
