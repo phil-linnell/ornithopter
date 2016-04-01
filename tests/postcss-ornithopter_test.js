@@ -36,4 +36,8 @@ describe("postcss-ornithopter", function () {
                                                     .equal({property: 'color',
                                                             value: ['red', 'green']});
   });
+
+  // it("should throw an error because there is no animation duration", function() {
+  //
+  // });
 });

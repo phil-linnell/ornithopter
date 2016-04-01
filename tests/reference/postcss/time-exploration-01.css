@@ -8,5 +8,5 @@
 }
 
 div {
-  animation: animation-set;
+  animation: animation-set 1s;
 }

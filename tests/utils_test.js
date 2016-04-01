@@ -2,7 +2,7 @@ import chai, {expect} from "chai";
 import chaiAsPromised from "chai-as-promised";
 
 import {parseTransformValue} from "utils/value";
-import {isTime, isTimingFunction, splitByTime} from "utils/time";
+import {isTime, isTimingFunction, splitByTime, convertToMilliseconds} from "utils/time";
 
 chai.use(chaiAsPromised);
 
@@ -59,6 +59,15 @@ describe("utils", function () {
     });
     it("should return the second array with two time values and a timing function", function () {
       expect(splitByTime(["red", "green", "1s", ".5s", "cubic-bezier(.5,1,1,0)"])).to.deep.equal([["red", "green"], ["1s", ".5s", "cubic-bezier(.5,1,1,0)"]]);
+    });
+  });
+
+  describe("convertToMilliseconds", function () {
+    it("should convert duration in seconds to duration in milliseconds", function () {
+      expect(convertToMilliseconds("1s")).to.deep.equal("1000ms");
+    });
+    it("should return duration as it is already in milliseconds", function () {
+      expect(convertToMilliseconds("1000ms")).to.deep.equal("1000ms");
     });
   });
 
