@@ -64,10 +64,10 @@ describe("utils", function () {
 
   describe("toMilliseconds", function () {
     it("should convert duration in seconds to duration in milliseconds", function () {
-      expect(toMilliseconds("1s")).to.deep.equal("1000ms");
+      expect(toMilliseconds("1s")).to.deep.equal(1000);
     });
     it("should return duration as it is already in milliseconds", function () {
-      expect(toMilliseconds("1000ms")).to.deep.equal("1000ms");
+      expect(toMilliseconds("1000ms")).to.deep.equal(1000);
     });
   });
 
