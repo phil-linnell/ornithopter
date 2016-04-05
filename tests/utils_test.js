@@ -2,7 +2,7 @@ import chai, {expect} from "chai";
 import chaiAsPromised from "chai-as-promised";
 
 import {parseTransformValue} from "utils/value";
-import {isTime, isTimingFunction, splitByTime, toMilliseconds} from "utils/time";
+import {isTime, isTimingFunction, splitByTime, toMilliseconds, keyframePercentage} from "utils/time";
 
 chai.use(chaiAsPromised);
 
@@ -66,8 +66,20 @@ describe("utils", function () {
     it("should convert duration in seconds to duration in milliseconds", function () {
       expect(toMilliseconds("1s")).to.deep.equal(1000);
     });
+    it("should convert duration in seconds to duration in milliseconds", function () {
+      expect(toMilliseconds("1.5s")).to.deep.equal(1500);
+    });
     it("should return duration as it is already in milliseconds", function () {
       expect(toMilliseconds("1000ms")).to.deep.equal(1000);
+    });
+  });
+
+  describe("keyframePercentage", function () {
+    it("should convert a time value to a value that represents a percentage of the total duration", function () {
+      expect(keyframePercentage(1000, 2000)).to.deep.equal(50);
+    });
+    it("should convert a time value to a value that represents a percentage of the total duration", function () {
+      expect(keyframePercentage(500, 1700)).to.deep.equal(29.4);
     });
   });
 
