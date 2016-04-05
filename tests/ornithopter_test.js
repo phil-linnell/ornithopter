@@ -55,12 +55,12 @@ describe("ornithopter", () => {
     });
   });
 
-  describe(".process()", () => {
+  describe(".process() with delay", () => {
     it("should return steps with delay and duration applied", () => {
-      const actual = () => process({property: 'color', value: ['red', 'green', '.5s', '.5s'], totalDuration: '1s'});
-      const expected = [{step: 50, properties: [{property: 'color', value: 'red'}]},
-      {step: 100, properties: [{property: 'color', value: 'green'}]}];
-      expect(actual).to.throw(Error);
+      const actual = process({property: 'color', value: ['red', 'green', '.5s'], totalDuration: '1s'});
+      const expected = [{step: 0, properties: [{property: 'color', value: 'red'}]},
+      {step: 50, properties: [{property: 'color', value: 'green'}]}];
+      expect(actual).to.deep.equal(expected);
     });
   });
 });
