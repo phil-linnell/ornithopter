@@ -57,27 +57,27 @@ describe("steps", () => {
   });
   describe(".changePoint()", () => {
     it("should always return 0", () => {
-      expect(changePoint(0, 4, n => n)).to.equal(0);
+      expect(Math.round(changePoint(0, 4, n => n) * 1000) / 1000).to.equal(0);
     });
 
     it("should always return 1", () => {
-      expect(changePoint(4, 4, n => n)).to.equal(1);
+      expect(Math.round(changePoint(4, 4, n => n) * 1000) / 1000).to.equal(1);
     });
 
     it("should return a change point between 0 and 1", () => {
-      expect(changePoint(1, 4, n => n)).to.equal(0.25);
+      expect(Math.round(changePoint(1, 4, n => n) * 1000) / 1000).to.equal(0.25);
     });
 
     it("should return a change point between 0 and 1", () => {
-      expect(changePoint(3, 7, n => n)).to.equal(0.429);
+      expect(Math.round(changePoint(3, 7, n => n) * 1000) / 1000).to.equal(0.429);
     });
 
     it("should return a change point between 0 and 1", () => {
-      expect(changePoint(5, 11, n => n)).to.equal(0.455);
+      expect(Math.round(changePoint(5, 11, n => n) * 1000) / 1000).to.equal(0.455);
     });
 
     it("should return a change point between 0 and 1", () => {
-      expect(changePoint(4, 9, n => n)).to.equal(0.444);
+      expect(Math.round(changePoint(4, 9, n => n) * 1000) / 1000).to.equal(0.444);
     });
   });
 
@@ -88,6 +88,30 @@ describe("steps", () => {
 
     it("should return the second keyframe with a .5s delay", () => {
       expect(percentage(0.25, 500, 500, 1000)).to.equal(62.5);
+    });
+
+    it("should return the second keyframe with a .2s delay", () => {
+      expect(percentage(0.5, 800, 200, 1000)).to.equal(60);
+    });
+
+    it("should return the middle keyframe with a .2s delay and shorter than total duration animation", () => {
+      expect(percentage(0.5, 200, 200, 1000)).to.equal(30);
+    });
+
+    it("should return the first keyframe with a .1s delay and shorter than total duration animation", () => {
+      expect(percentage(0, 160, 100, 640)).to.equal(15.63);
+    });
+
+    it("should return the middle keyframe with a .1s delay and shorter than total duration animation", () => {
+      expect(percentage(0.5, 160, 100, 640)).to.equal(28.13);
+    });
+
+    it("should return the penultimate keyframe with a .1s delay and shorter than total duration animation", () => {
+      expect(percentage(0.75, 480, 70, 825)).to.equal(52.12);
+    });
+
+    it("should return the penultimate keyframe with a .1s delay and shorter than total duration animation", () => {
+      expect(percentage((1/3), 1000, 0, 1000)).to.equal(33.33);
     });
   });
 });
