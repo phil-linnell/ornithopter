@@ -2,7 +2,7 @@ import chai, {expect} from "chai";
 import chaiAsPromised from "chai-as-promised";
 
 import {parseTransformValue} from "utils/value";
-import {isTime, isTimingFunction, splitByTime, toMilliseconds, keyframePercentage} from "utils/time";
+import {isTime, isTimingFunction, splitByTime, toMilliseconds, keyframePercentage, takeAccuracy} from "utils/time";
 
 chai.use(chaiAsPromised);
 
@@ -80,6 +80,24 @@ describe("utils", function () {
     });
     it("should convert a time value to a value that represents a percentage of the total duration", function () {
       expect(keyframePercentage(500, 1700)).to.deep.equal(29.4);
+    });
+  });
+
+  describe("takeAccuracy", function () {
+    it("should return the default value", function () {
+      expect(takeAccuracy([], 4)).to.deep.equal(4);
+    });
+    it("should return the accuracy value", function () {
+      expect(takeAccuracy(["3"], 4)).to.deep.equal(3);
+    });
+    it("should return the accuracy value", function () {
+      expect(takeAccuracy([".5s", "3"], 4)).to.deep.equal(3);
+    });
+    it("should return the accuracy value", function () {
+      expect(takeAccuracy([".5s"], 4)).to.deep.equal(4);
+    });
+    it("should return the accuracy value", function () {
+      expect(takeAccuracy([".5s", "1s", "ease-out"], 4)).to.deep.equal(4);
     });
   });
 

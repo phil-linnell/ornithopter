@@ -55,7 +55,6 @@ ease-out 1s       // ease-out timing function, 1s of duration
 ease-out 1s 0.5s  // ease-out timing function, 1s of duration, 0.5s of delay
 ```
 
-
 ## Roadmap
 
 * converge animation / css semantics.
