@@ -2,7 +2,7 @@ import chai, {expect} from "chai";
 import chaiAsPromised from "chai-as-promised";
 
 import {parseTransformValue} from "utils/value";
-import {isTime, isTimingFunction, splitByTime, toMilliseconds, keyframePercentage, takeAccuracy} from "utils/time";
+import {isTime, isTimingFunction, splitByTime, toMilliseconds, keyframePercentage, takeAccuracy, isUnitless} from "utils/time";
 
 chai.use(chaiAsPromised);
 
@@ -98,6 +98,15 @@ describe("utils", function () {
     });
     it("should return the accuracy value", function () {
       expect(takeAccuracy([".5s", "1s", "ease-out"], 4)).to.deep.equal(4);
+    });
+  });
+
+  describe("isUnitless", function () {
+    it("should return true", function () {
+      expect(isUnitless("5")).to.be.true;
+    });
+    it("should return false", function () {
+      expect(isUnitless("5s")).to.be.false;
     });
   });
 
