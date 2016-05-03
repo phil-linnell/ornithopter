@@ -1,5 +1,5 @@
 import {expect} from "chai";
-import {first, next, changePoint, percentage} from "steps";
+import {first, next, changePoint, percentage, keyframeValue, valueByLinear} from "steps";
 
 describe("steps", () => {
   describe(".first()", () => {
@@ -112,6 +112,34 @@ describe("steps", () => {
 
     it("should return the penultimate keyframe with a .1s delay and shorter than total duration animation", () => {
       expect(percentage((1/3), 1000, 0, 1000)).to.equal(33.33);
+    });
+  });
+
+  describe(".keyframeValue()", () => {
+    it("should return the first value", () => {
+      expect(keyframeValue(0, null, [0, 100], 4, x => x)).to.equal(0);
+    });
+
+    it("should return the last value", () => {
+      expect(keyframeValue(4, null, [0, 100], 4, x => x)).to.equal(100);
+    });
+
+    it("should return the last value", () => {
+      expect(keyframeValue(1, 0, [0, 100], 4, valueByLinear)).to.equal(20);
+    });
+  });
+
+  describe(".valueByLinear()", () => {
+    it("should return the nth value in a linear timing function", () => {
+      expect(valueByLinear(4, 0, 100)).to.equal(20);
+    });
+
+    it("should return the nth value in a linear timing function", () => {
+      expect(valueByLinear(4, 40, 100)).to.equal(60);
+    });
+
+    it("should return the nth value in a linear timing function", () => {
+      expect(valueByLinear(4, 14.6, 73)).to.equal(29.2);
     });
   });
 });

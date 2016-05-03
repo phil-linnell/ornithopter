@@ -34,7 +34,7 @@ This syntax follows [MDN Value definition syntax](https://developer.mozilla.org/
 where
 <identifier>        = IDENT
 <animation-unit>    = <property> : <composed-value> ;
-<composed-value>    = [<value>+ || <composed-function>] <timing>?
+<composed-value>    = [<value> <value> || <composed-function>] <timing>?
 <timing>            = [<duration> <delay>?] | <timing-function>
 <composed-function> = [translate || translateX || translateY || scale ||
                       scaleX || scaleY || rotate || skew || skewX || skewY ||
