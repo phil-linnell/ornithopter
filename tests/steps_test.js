@@ -124,7 +124,7 @@ describe("steps", () => {
       expect(keyframeValue(4, null, [0, 100], 4, x => x)).to.equal(100);
     });
 
-    it("should return the last value", () => {
+    it("should return the second value", () => {
       expect(keyframeValue(1, 0, [0, 100], 4, valueByLinear)).to.equal(20);
     });
   });
