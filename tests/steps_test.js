@@ -1,5 +1,6 @@
 import {expect} from "chai";
-import {first, next, changePoint, percentage, keyframeValue, valueByLinear} from "steps";
+import {first, next, changePoint, percentage, keyframeValue, valueByLinear, castValues} from "steps";
+import Color from "utils/color";
 
 describe("steps", () => {
   describe(".first()", () => {
@@ -141,5 +142,20 @@ describe("steps", () => {
     it("should return the nth value in a linear timing function", () => {
       expect(valueByLinear(4, 14.6, 73)).to.equal(29.2);
     });
+
+    it("should return the nth color value in a linear timing function", () => {
+      expect(valueByLinear(4, Color("red"), Color("pink"))).to.deep.equal("rgb(255, 38, 41)");
+    });
+  });
+});
+
+
+describe("castValues()", function () {
+  it("should keep numeric values untouched", function () {
+    expect(castValues(['0', '100px'])).to.deep.equal(['0', '100px']);
+  });
+
+  it("should cast color values as Color", function () {
+    expect(castValues(['red', '#FF00AA'])).to.deep.equal([Color('red'), Color('#FF00AA')]);
   });
 });

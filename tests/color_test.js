@@ -1,6 +1,6 @@
 import {expect} from "chai";
 import Color, {isColor, rangeLength} from "utils/color";
-import {keyframeValue, valueByLinearColor} from "steps";
+import {keyframeValue} from "steps";
 
 describe("color", function () {
   describe("experiment", function () {
@@ -15,8 +15,14 @@ describe("color", function () {
       expect(isColor("red")).to.be.true;
       expect(isColor("deeppink")).to.be.true;
     });
+
     it("isColor() false", function () {
       expect(isColor("bronze")).to.be.false;
+    });
+
+    it("isColor() false", function () {
+      expect(isColor("100px")).to.be.false;
+      expect(isColor("0")).to.be.false;
     });
   });
 
@@ -42,19 +48,5 @@ describe("color", function () {
     it("should return the second value", function () {
       expect(keyframeValue(1, Color("red"), [Color("red"), Color("green")], 4, valueByLinearColor)).to.deep.equal(Color({r: 204, g: 26, b: 0}));
     });
-  });
-
-  describe(".valueByLinearColor()", () => {
-    it("should return the nth color value in a linear timing function", () => {
-      expect(valueByLinearColor(4, Color("red"), Color("pink"))).to.deep.equal(Color({r: 255, g: 38, b: 41}));
-    });
-
-    // it("should return the nth value in a linear timing function", () => {
-    //   expect(valueByLinearColor(4, 40, 100)).to.equal(60);
-    // });
-    //
-    // it("should return the nth value in a linear timing function", () => {
-    //   expect(valueByLinearColor(4, 14.6, 73)).to.equal(29.2);
-    // });
   });
 });
