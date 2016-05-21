@@ -3,7 +3,6 @@ import chaiAsPromised from "chai-as-promised";
 
 import {parseTransformValue} from "utils/value";
 import {isTime, isTimingFunction, splitByTime, toMilliseconds, keyframePercentage, splitByAccuracy, isUnitless} from "utils/time";
-import {toNumber} from "utils/number";
 
 chai.use(chaiAsPromised);
 
@@ -108,28 +107,6 @@ describe("utils", function () {
     });
     it("should return false", function () {
       expect(isUnitless("5s")).to.be.false;
-    });
-  });
-
-  describe("toNumber", function () {
-    it("should return a pixel object", function () {
-      expect(toNumber("10px")).to.deep.equal({value: 10, unit: 'px'});
-    });
-
-    it("should return a decimal percentage object", function () {
-      expect(toNumber("52.2%")).to.deep.equal({value: 52.2, unit: '%'});
-    });
-
-    it("should return a zeroless decimal number object", function () {
-      expect(toNumber(".5s")).to.deep.equal({value: 0.5, unit: 's'});
-    });
-
-    it("should return a unitless zero object", function () {
-      expect(toNumber("0")).to.deep.equal({value: 0, unit: ''});
-    });
-
-    it("should return a unitless zero object", function () {
-      expect(toNumber("75.5")).to.deep.equal({value: 75.5, unit: ''});
     });
   });
 });
