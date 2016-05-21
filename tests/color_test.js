@@ -1,6 +1,6 @@
 import {expect} from "chai";
 import Color, {isColor, rangeLength} from "utils/color";
-import {keyframeValue} from "steps";
+import {keyframeValue, valueByLinearColor} from "steps";
 
 describe("color", function () {
   describe("experiment", function () {
