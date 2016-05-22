@@ -1,10 +1,10 @@
 @keyframes animation-set {
   0% {
-    color: red;
+    color: rgb(255, 0, 0);
     transform: translateX(0);
   }
   100% {
-    color: green;
+    color: rgb(0, 128, 0);
     transform: translateX(100px);
   }
 }
