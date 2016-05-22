@@ -35,7 +35,7 @@ describe('ornithopter', function () {
         step: 0,
         properties: [{property: 'transform', value: 'translateX(0)'}]
       }, {
-        step: 33.33,
+        step: 50,
         properties: [{property: 'transform', value: 'translateX(50px)'}]
       }, {
         step: 100,

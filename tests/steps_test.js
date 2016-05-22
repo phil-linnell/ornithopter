@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import { changePoint,
          percentage,
          interpolateValue,
+         stepByLinear,
          valueByLinear,
          valueByLinearNumber,
          valueByLinearColor } from 'steps';
@@ -11,21 +12,25 @@ import { Number } from 'utils/number';
 describe('steps', function () {
   describe('.changePoint()', function () {
     it('should always return 0', function () {
-      expect(Math.round(changePoint(0, null, 4, valueByLinear) * 1000) / 1000).to.equal(0);
+      expect(Math.round(changePoint(0, null, 4, stepByLinear) * 1000) / 1000).to.equal(0);
     });
 
     it('should always return 1', function () {
-      expect(Math.round(changePoint(4, 0.8, 4, valueByLinear) * 1000) / 1000).to.equal(1);
+      expect(Math.round(changePoint(4, 0.8, 4, stepByLinear) * 1000) / 1000).to.equal(1);
     });
 
     it('should return a change point between 0 and 1', function () {
-      expect(Math.round(changePoint(1, 0, 4, valueByLinear) * 1000) / 1000).to.equal(0.20);
+      expect(Math.round(changePoint(1, 0, 4, stepByLinear) * 1000) / 1000).to.equal(0.25);
     });
 
     it('should return a change point between 0 and 1', function () {
-      expect(Math.round(changePoint(1, 0, 7, valueByLinear) * 1000) / 1000).to.equal(0.125);
-      expect(Math.round(changePoint(2, 0.125, 7, valueByLinear) * 1000) / 1000).to.equal(0.25);
-      expect(Math.round(changePoint(3, 0.25, 7, valueByLinear) * 1000) / 1000).to.equal(0.375);
+      expect(Math.round(changePoint(1, 0, 7, stepByLinear) * 1000) / 1000).to.equal(0.143);
+      expect(Math.round(changePoint(2, 0.143, 7, stepByLinear) * 1000) / 1000).to.equal(0.286);
+      expect(Math.round(changePoint(3, 0.286, 7, stepByLinear) * 1000) / 1000).to.equal(0.429);
+    });
+
+    it('should return a change point between 0 and 1', function () {
+      expect(Math.round(changePoint(1, 0, 2, stepByLinear) * 1000) / 1000).to.equal(0.5);
     });
   });
 
