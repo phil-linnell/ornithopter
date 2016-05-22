@@ -1,6 +1,5 @@
 import { expect } from 'chai';
 import { first,
-         next,
          changePoint,
          percentage,
          interpolateValue,
@@ -21,49 +20,6 @@ describe('steps', function () {
     });
   });
 
-  describe('.next()', function () {
-    it('should return the next step from 0', function () {
-      const duration = 1;
-      const delay = 0;
-      const previous = 0;
-      const totalDuration = 1;
-      const totalSteps = 2;
-
-      expect(next(duration,
-                  delay,
-                  previous,
-                  totalDuration,
-                  totalSteps)).to.equal(100);
-    });
-
-    it('should return the next step from 50 with no delay', function () {
-      const duration = 1;
-      const delay = 0;
-      const previous = 50;
-      const totalDuration = 1;
-      const totalSteps = 2;
-
-      expect(next(duration,
-                  delay,
-                  previous,
-                  totalDuration,
-                  totalSteps)).to.equal(100);
-    });
-
-    it('should return the next step from 50 with delay', function () {
-      const duration = 0.5;
-      const delay = 0.5;
-      const previous = 50;
-      const totalDuration = 1;
-      const totalSteps = 2;
-
-      expect(next(duration,
-                  delay,
-                  previous,
-                  totalDuration,
-                  totalSteps)).to.equal(100);
-    });
-  });
   describe('.changePoint()', function () {
     it('should always return 0', function () {
       expect(Math.round(changePoint(0, null, 4, valueByLinear) * 1000) / 1000).to.equal(0);
