@@ -12,13 +12,13 @@ describe('ornithopter', function () {
       const expected = [{
         step: 0,
         properties: [
-          { property: 'color', value: 'red' },
+          { property: 'color', value: 'rgb(255, 0, 0)' },
           { property: 'transform', value: 'translateX(0)' }
         ]
       }, {
         step: 100,
         properties: [
-          { property: 'color', value: 'green' },
+          { property: 'color', value: 'rgb(0, 128, 0)' },
           { property: 'transform', value: 'translateX(100px)' }
         ]
       }];
