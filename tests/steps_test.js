@@ -1,6 +1,5 @@
 import { expect } from 'chai';
-import { first,
-         changePoint,
+import { changePoint,
          percentage,
          interpolateValue,
          valueByLinear,
@@ -10,16 +9,6 @@ import Color from 'utils/color';
 import { Number } from 'utils/number';
 
 describe('steps', function () {
-  describe('.first()', function () {
-    it('should return 0 when delay is 0', function () {
-      expect(first([1, 0, 'linear'], 1)).to.equal(0);
-    });
-
-    it('should return 50 when delay is 0.5', function () {
-      expect(first([1, 0.5, 'linear'], 1)).to.equal(50);
-    });
-  });
-
   describe('.changePoint()', function () {
     it('should always return 0', function () {
       expect(Math.round(changePoint(0, null, 4, valueByLinear) * 1000) / 1000).to.equal(0);
