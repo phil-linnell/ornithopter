@@ -1,7 +1,7 @@
 import chai, { expect } from 'chai';
 
 import { parseTransformValue } from 'utils/value';
-import { isTime, isTimingFunction, splitByTime, toMilliseconds, keyframePercentage, splitByAccuracy, isUnitless } from "utils/time";
+import { isTime, isTimingFunction, splitByTime, toMilliseconds, keyframePercentage, splitBySmoothness, isUnitless } from "utils/time";
 
 describe('utils/time', function () {
   describe('isTime', function () {
@@ -67,21 +67,21 @@ describe('utils/time', function () {
     });
   });
 
-  describe("splitByAccuracy", function () {
+  describe("splitBySmoothness", function () {
     it("should return the default value", function () {
-      expect(splitByAccuracy([], 4)).to.deep.equal([[], 4]);
+      expect(splitBySmoothness([], 4)).to.deep.equal([[], 4]);
     });
-    it("should return the accuracy value", function () {
-      expect(splitByAccuracy(["3"], 4)).to.deep.equal([[], 3]);
+    it("should return the smoothness value", function () {
+      expect(splitBySmoothness(["3"], 4)).to.deep.equal([[], 3]);
     });
-    it("should return the accuracy value", function () {
-      expect(splitByAccuracy([".5s", "3"], 4)).to.deep.equal([[".5s"], 3]);
+    it("should return the smoothness value", function () {
+      expect(splitBySmoothness([".5s", "3"], 4)).to.deep.equal([[".5s"], 3]);
     });
-    it("should return the accuracy value", function () {
-      expect(splitByAccuracy([".5s"], 4)).to.deep.equal([[".5s"], 4]);
+    it("should return the smoothness value", function () {
+      expect(splitBySmoothness([".5s"], 4)).to.deep.equal([[".5s"], 4]);
     });
-    it("should return the accuracy value", function () {
-      expect(splitByAccuracy([".5s", "1s", "ease-out"], 4)).to.deep.equal([[".5s", "1s", "ease-out"], 4]);
+    it("should return the smoothness value", function () {
+      expect(splitBySmoothness([".5s", "1s", "ease-out"], 4)).to.deep.equal([[".5s", "1s", "ease-out"], 4]);
     });
   });
 

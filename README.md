@@ -25,6 +25,7 @@ This syntax follows [MDN Value definition syntax](https://developer.mozilla.org/
 * `<value>`: A valid CSS value for the given property. If the value is a function (e.g. `transform` functions,) use a `<composed-function>`.
 * `<transform-function>`: Restricted set from [transform function](https://developer.mozilla.org/en-US/docs/Web/CSS/transform#Syntax).
 * `<function-value>` : A valid value for the given function.
+* `<smoothness>` : Amount of interpolated values for a given `<animation-unit>`
 
 ```
 @ornithopter <identifier> {
@@ -35,7 +36,7 @@ where
 <identifier>        = IDENT
 <animation-unit>    = <property> : <composed-value> ;
 <composed-value>    = [<value> <value> || <composed-function>] <timing>?
-<timing>            = [<duration> <delay>?] | <timing-function>
+<timing>            = [<duration> <delay>?] | <timing-function> | <smoothness>
 <composed-function> = [translate || translateX || translateY || scale ||
                       scaleX || scaleY || rotate || skew || skewX || skewY ||
                       translate3d || translateZ || scale3d || scaleZ ||
@@ -53,6 +54,9 @@ ease-out          // ease-out timing function
 ease-out 1s       // ease-out timing function, 1s of duration
 1s 0.5s ease-out  // 1s of duration, 0.5s of delay, ease-out timing function
 ease-out 1s 0.5s  // ease-out timing function, 1s of duration, 0.5s of delay
+4                 // smoothness of 4
+1s 4              // 1s of duration, smoothness of 4
+4 1s ease-out     // smoothness of 4, 1s of duration, ease-out timing function
 ```
 
 ## Roadmap
