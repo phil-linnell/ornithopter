@@ -30,13 +30,13 @@ describe('ornithopter', function () {
     });
 
     it('should return three keyframes for transform with translateY', function () {
-      const actual = process({ property: 'transform', value: ['0', '150px', '2'], fn: 'translateX', totalDuration: '1s' });
+      const actual = process({ property: 'transform', value: ['0', '150px', '1'], fn: 'translateX', totalDuration: '1s' });
       const expected = [{
         step: 0,
         properties: [{property: 'transform', value: 'translateX(0)'}]
       }, {
         step: 50,
-        properties: [{property: 'transform', value: 'translateX(50px)'}]
+        properties: [{property: 'transform', value: 'translateX(75px)'}]
       }, {
         step: 100,
         properties: [{property: 'transform', value: 'translateX(150px)'}]

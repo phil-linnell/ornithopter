@@ -2,8 +2,6 @@ import { expect } from 'chai';
 import { changePoint,
          percentage,
          interpolateValue,
-         stepByLinear,
-         valueByLinear,
          valueByLinearNumber,
          valueByLinearColor } from 'steps';
 import Color from 'utils/color';
@@ -12,25 +10,21 @@ import { Number } from 'utils/number';
 describe('steps', function () {
   describe('.changePoint()', function () {
     it('should always return 0', function () {
-      expect(Math.round(changePoint(0, null, 4, stepByLinear) * 1000) / 1000).to.equal(0);
+      expect(Math.round(changePoint(0, 2) * 1000) / 1000).to.equal(0);
     });
 
     it('should always return 1', function () {
-      expect(Math.round(changePoint(4, 0.8, 4, stepByLinear) * 1000) / 1000).to.equal(1);
+      expect(Math.round(changePoint(1, 2) * 1000) / 1000).to.equal(1);
     });
 
     it('should return a change point between 0 and 1', function () {
-      expect(Math.round(changePoint(1, 0, 4, stepByLinear) * 1000) / 1000).to.equal(0.25);
+      expect(Math.round(changePoint(1, 3) * 1000) / 1000).to.equal(0.5);
     });
 
     it('should return a change point between 0 and 1', function () {
-      expect(Math.round(changePoint(1, 0, 7, stepByLinear) * 1000) / 1000).to.equal(0.143);
-      expect(Math.round(changePoint(2, 0.143, 7, stepByLinear) * 1000) / 1000).to.equal(0.286);
-      expect(Math.round(changePoint(3, 0.286, 7, stepByLinear) * 1000) / 1000).to.equal(0.429);
-    });
-
-    it('should return a change point between 0 and 1', function () {
-      expect(Math.round(changePoint(1, 0, 2, stepByLinear) * 1000) / 1000).to.equal(0.5);
+      expect(Math.round(changePoint(1, 8) * 1000) / 1000).to.equal(0.143);
+      expect(Math.round(changePoint(2, 8) * 1000) / 1000).to.equal(0.286);
+      expect(Math.round(changePoint(3, 8) * 1000) / 1000).to.equal(0.429);
     });
   });
 
@@ -70,45 +64,45 @@ describe('steps', function () {
 
   describe('.interpolateValue()', function () {
     it('should return the first value', function () {
-      expect(interpolateValue(0, null, [Number(0, ''), Number(100, '')], 4, valueByLinearNumber)).to.deep.equal(Number(0, ''));
+      expect(interpolateValue(0, null, [Number(0, ''), Number(100, '')], 6, valueByLinearNumber)).to.deep.equal(Number(0, ''));
     });
 
     it('should return the last value', function () {
-      expect(interpolateValue(4, null, [Number(0, ''), Number(100, '')], 4, valueByLinearNumber)).to.deep.equal(Number(100, ''));
+      expect(interpolateValue(5, null, [Number(0, ''), Number(100, '')], 6, valueByLinearNumber)).to.deep.equal(Number(100, ''));
     });
 
     it('should return the second value', function () {
-      expect(interpolateValue(1, Number(0, ''), [Number(0, ''), Number(100, '')], 4, valueByLinearNumber)).to.deep.equal(Number(20, ''));
+      expect(interpolateValue(1, Number(0, ''), [Number(0, ''), Number(100, '')], 6, valueByLinearNumber)).to.deep.equal(Number(20, ''));
     });
 
     it("should return the first value", function () {
-      expect(interpolateValue(0, null, [Color("red"), Color("green")], 4, valueByLinearColor)).to.deep.equal(Color('red'));
+      expect(interpolateValue(0, null, [Color("red"), Color("green")], 6, valueByLinearColor)).to.deep.equal(Color('red'));
     });
 
     it("should return the last value", function () {
-      expect(interpolateValue(4, null, [Color("red"), Color("green")], 4, valueByLinearColor)).to.deep.equal(Color('green'));
+      expect(interpolateValue(5, null, [Color("red"), Color("green")], 6, valueByLinearColor)).to.deep.equal(Color('green'));
     });
 
     it("should return the second value", function () {
-      expect(interpolateValue(1, Color("red"), [Color("red"), Color("green")], 4, valueByLinearColor)).to.deep.equal(Color({r: 204, g: 26, b: 0}));
+      expect(interpolateValue(1, Color("red"), [Color("red"), Color("green")], 6, valueByLinearColor)).to.deep.equal(Color({r: 204, g: 26, b: 0}));
     });
   });
 
   describe('.valueByLinearNumber()', function () {
     it('should return the nth value in a linear timing function', function () {
-      expect(valueByLinearNumber(4, Number(0, ''), Number(100, ''))).to.deep.equal(Number(20, ''));
+      expect(valueByLinearNumber(6, Number(0, ''), Number(100, ''))).to.deep.equal(Number(20, ''));
     });
 
     it('should return the nth value in a linear timing function', function () {
-      expect(valueByLinearNumber(4, Number(40, '%'), Number(100, '%'))).to.deep.equal(Number(60, '%'));
+      expect(valueByLinearNumber(6, Number(40, '%'), Number(100, '%'))).to.deep.equal(Number(60, '%'));
     });
 
     it('should return the nth value in a linear timing function', function () {
-      expect(valueByLinearNumber(4, Number(14.6, ''), Number(73, ''))).to.deep.equal(Number(29.2, ''));
+      expect(valueByLinearNumber(6, Number(14.6, ''), Number(73, ''))).to.deep.equal(Number(29.2, ''));
     });
 
     it('should return the nth color value in a linear timing function', function () {
-      expect(valueByLinearColor(4, Color('red'), Color('pink'))).to.deep.equal(Color().rgb(255, 38, 41));
+      expect(valueByLinearColor(6, Color('red'), Color('pink'))).to.deep.equal(Color().rgb(255, 38, 41));
     });
   });
 });
