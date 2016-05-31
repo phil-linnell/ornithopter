@@ -16,6 +16,6 @@ make test TEST_FILES=tests/color_test.js
 
 Next time
 
-Total duration not working? See smoothness-02 test
-Look into our computation regarding time. Start by splitByTime, then test how we implement time re keyframe generation.
-So remove tests and start deep down.
+Implement 'fill-in' keyframes, e.g. 0% when there is a delay.
+Also, test if we need to have a 'fill-in' keyframe for 100%.
+Discuss what to do with a property on the element that matches the animation-unit property.
