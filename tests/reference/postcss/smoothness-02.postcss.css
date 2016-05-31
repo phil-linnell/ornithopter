@@ -1,0 +1,7 @@
+@ornithopter animation-set {
+  top: 0 100px 5 1s .5s;
+}
+
+div {
+  animation: animation-set 2s infinite;
+}

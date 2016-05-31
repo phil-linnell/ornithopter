@@ -44,6 +44,9 @@ describe('utils/time', function () {
     it('should return the second array with two time values and a timing function', function () {
       expect(splitByTime(['red', 'green', '1s', '.5s', 'cubic-bezier(.5,1,1,0)'])).to.deep.equal([['red', 'green'], ['1s', '.5s', 'cubic-bezier(.5,1,1,0)']]);
     });
+    it('should return the second array with two time values and a timing function including a smoothness value', function () {
+      expect(splitByTime(['red', 'green', '5', '1s', '.5s', 'cubic-bezier(.5,1,1,0)'])).to.deep.equal([['red', 'green'], ['5', '1s', '.5s', 'cubic-bezier(.5,1,1,0)']]);
+    });
   });
 
   describe("toMilliseconds", function () {
@@ -82,6 +85,12 @@ describe('utils/time', function () {
     });
     it("should return the smoothness value", function () {
       expect(splitBySmoothness([".5s", "1s", "ease-out"], 4)).to.deep.equal([[".5s", "1s", "ease-out"], 4]);
+    });
+    it("should return the smoothness value", function () {
+      expect(splitBySmoothness(['5', '1s', '.5s', 'ease-out'], 2)).to.deep.equal([["1s", ".5s", "ease-out"], 5]);
+    });
+    it("should return the smoothness value", function () {
+      expect(splitBySmoothness(['1s', '.5s', 'ease-out', '5'], 2)).to.deep.equal([["1s", ".5s", "ease-out"], 5]);
     });
   });
 

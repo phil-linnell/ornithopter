@@ -49,4 +49,26 @@ describe('ornithopter', function () {
       expect(actual).to.deep.equal(expected);
     });
   });
+
+  describe('.process() with delay and smoothness', function () {
+    it('should return steps with delay and duration applied', function () {
+      const actual = process({
+        property: 'top',
+        value: ['0', '100px', '4', '1s', '.5s'],
+        totalDuration: '2s',
+      });
+      const expected = [
+        { step: 25, properties: [{ property: 'top', value: '0' }] },
+        { step: 35, properties: [{ property: 'top', value: '20px' }] },
+        { step: 45, properties: [{ property: 'top', value: '40px' }] },
+        { step: 55, properties: [{ property: 'top', value: '60px' }] },
+        { step: 65, properties: [{ property: 'top', value: '80px' }] },
+        { step: 75, properties: [{ property: 'top', value: '100px' }] },
+      ];
+
+      expect(actual).to.deep.equal(expected);
+    });
+  });
 });
+
+//top: 0 100px 5 1s .5s;

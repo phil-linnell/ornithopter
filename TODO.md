@@ -16,5 +16,6 @@ make test TEST_FILES=tests/color_test.js
 
 Next time
 
-Walk through ornithopter.js and re-implement smoothness
-n = smoothness + tokens.length - 1
+Total duration not working? See smoothness-02 test
+Look into our computation regarding time. Start by splitByTime, then test how we implement time re keyframe generation.
+So remove tests and start deep down.

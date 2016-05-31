@@ -1,0 +1,30 @@
+@keyframes animation-set {
+  0% {
+    top: 0;
+  }
+  25% {
+    top: 0;
+  }
+  35% {
+    top: 20px;
+  }
+  45% {
+    top: 40px;
+  }
+  55% {
+    top: 60px;
+  }
+  65% {
+    top: 80px;
+  }
+  75% {
+    top: 100px;
+  }
+  100% {
+    top: 100px;
+  }
+}
+
+div {
+  animation: animation-set 2s infinite;
+}
